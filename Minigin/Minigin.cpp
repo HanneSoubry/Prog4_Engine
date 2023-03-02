@@ -9,6 +9,9 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
+#include "Time.h"
+
+#include <iostream>
 
 SDL_Window* g_window{};
 
@@ -82,12 +85,17 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& renderer = Renderer::GetInstance();
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
+	auto& time = Time::GetInstance();
 
 	// todo: this update loop could use some work.
 	bool doContinue = true;
 	while (doContinue)
 	{
+		time.Update();
+
 		doContinue = input.ProcessInput();
+
+		// to ask elapsedSeconds -> Singleton Time
 		sceneManager.Update();
 		renderer.Render();
 	}
