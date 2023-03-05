@@ -9,7 +9,7 @@ namespace dae
 	class TextureComponent final : public BaseComponent
 	{
 	public:
-		TextureComponent(std::shared_ptr<GameObject> pParent);
+		TextureComponent(std::shared_ptr<GameObject> pOwner);
 		virtual ~TextureComponent() override = default;
 		TextureComponent(const TextureComponent& other) = delete;
 		TextureComponent(TextureComponent&& other) = delete;

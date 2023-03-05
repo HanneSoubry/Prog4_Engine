@@ -69,13 +69,7 @@ namespace dae
 			std::shared_ptr<T> casted = std::dynamic_pointer_cast<T>(m_pComponents[i]);
 			if (casted != nullptr)	// cast success
 			{
-				if (i != amount - 1)
-				{
-					// if not the last one -> swap with last element
-					m_pComponents[i] = m_pComponents[amount];
-				}
-
-				m_pComponents.pop_back();
+				m_pComponents.erase(std::remove(m_pComponents.begin(), m_pComponents.end(), m_pComponents[i]));
 			}
 		}
 	}

@@ -3,21 +3,23 @@
 #include "TextureComponent.h"
 #include "Renderer.h"
 
-dae::RenderTextureComponent::RenderTextureComponent(std::shared_ptr<GameObject> pParent)
-	:BaseComponent(pParent)
+dae::RenderTextureComponent::RenderTextureComponent(std::shared_ptr<GameObject> pOwner)
+	:BaseComponent(pOwner)
 {
 }
 
 void dae::RenderTextureComponent::Render() const
 {
-	std::shared_ptr<GameObject> parent{ m_pParent.lock() };
-	std::shared_ptr<TextureComponent> textureComponent{ parent->GetComponent<TextureComponent>() };
-
-	if (textureComponent == nullptr)
+	if (m_pTextureComponent == nullptr)
 		return;	// safety check
 
-	std::shared_ptr<Texture2D> texture = textureComponent->GetTexture();
-	Transform transform = parent->GetPosition();
+	std::shared_ptr<Texture2D> texture = m_pTextureComponent->GetTexture();
+	Transform transform = GetOwner()->GetPosition();
 
 	Renderer::GetInstance().RenderTexture(*texture.get(), transform.GetPosition().x, transform.GetPosition().y);
+}
+
+void dae::RenderTextureComponent::SetTextureToRender(std::shared_ptr<TextureComponent> textureComp)
+{
+	m_pTextureComponent = textureComp;
 }

@@ -1,6 +1,7 @@
 #include "BaseComponent.h"
+#include "GameObject.h"
 
-dae::BaseComponent::BaseComponent(std::shared_ptr<GameObject> pParent)
+dae::BaseComponent::BaseComponent(std::shared_ptr<GameObject> pOwner)
 {
-	m_pParent = pParent;
+	m_pOwner = pOwner;
 }

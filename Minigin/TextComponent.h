@@ -11,7 +11,7 @@ namespace dae
 	class TextComponent final : public BaseComponent
 	{
 	public:
-		TextComponent(std::shared_ptr<GameObject> pParent);
+		TextComponent(std::shared_ptr<GameObject> pOwner);
 		virtual ~TextComponent() override = default;
 		TextComponent(const TextComponent& other) = delete;
 		TextComponent(TextComponent&& other) = delete;
@@ -27,6 +27,10 @@ namespace dae
 	private:
 		std::shared_ptr<Texture2D> m_pTexture{};
 		std::shared_ptr<Font> m_pFont{};
+		std::string m_Text{};
 		SDL_Color m_Color{ 255, 255, 255 };	// default white
+
+		// dirty flag pattern
+		bool m_ShouldUpdate{};
 	};
 }

@@ -10,6 +10,7 @@ namespace dae
 	public:
 		float TotalTime();	// time since start of program
 		float ElapsedSeconds(); // seconds since last frame
+		std::chrono::steady_clock::time_point LastTime();
 
 		void Update();
 

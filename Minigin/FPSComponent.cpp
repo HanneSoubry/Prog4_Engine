@@ -5,8 +5,8 @@
 #include <cmath>
 #include <string>
 
-dae::FPSComponent::FPSComponent(std::shared_ptr<GameObject> pParent)
-	:BaseComponent(pParent)
+dae::FPSComponent::FPSComponent(std::shared_ptr<GameObject> pOwner)
+	:BaseComponent(pOwner)
 {
 }
 
@@ -18,20 +18,25 @@ void dae::FPSComponent::Update()
 
 	if (m_Time >= maxTime)
 	{
-		// get text for output
-		std::shared_ptr<GameObject> parent{ m_pParent.lock() };
-		std::shared_ptr<TextComponent> textComponent{ parent->GetComponent<TextComponent>() };
-
-		if (textComponent == nullptr)
+		if (m_pTextComponent == nullptr)
 			return;	// safety check
 
 		// calculate fps over last second
 		float fps{ m_Frames / m_Time };
 		int fpsRounded{ static_cast<int>(fps + 0.5f) };	// + 0.5f and round down -> correctly rounded value
 
-		textComponent->SetText(std::to_string(fpsRounded) + " FPS");
+		if (fpsRounded != m_LastFPS)
+		{
+			m_pTextComponent->SetText(std::to_string(fpsRounded) + " FPS");
+			m_LastFPS = fpsRounded;
+		}
 
 		m_Time = 0;
 		m_Frames = 0;
 	}
+}
+
+void dae::FPSComponent::SetTextTarget(std::shared_ptr<TextComponent> textComp)
+{
+	m_pTextComponent = textComp;
 }

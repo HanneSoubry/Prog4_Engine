@@ -87,8 +87,10 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& input = InputManager::GetInstance();
 	auto& time = Time::GetInstance();
 
-	// todo: this update loop could use some work.
 	bool doContinue = true;
+	const float desiredFPS{ 60.f };
+	const int frameTimeMs{ static_cast<int>(1000 / desiredFPS) };
+
 	while (doContinue)
 	{
 		time.Update();
@@ -98,5 +100,10 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		// to ask elapsedSeconds -> Singleton Time
 		sceneManager.Update();
 		renderer.Render();
+
+		// sleep if faster than desired fps
+		const auto sleepTime{ time.LastTime() + std::chrono::milliseconds(frameTimeMs) - std::chrono::high_resolution_clock::now() };
+		// will do nothing if sleeptime < 0
+		std::this_thread::sleep_for(sleepTime);
 	}
 }
