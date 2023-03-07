@@ -14,7 +14,7 @@ void dae::RenderTextComponent::Render() const
 		return;	// safety check
 
 	std::shared_ptr<Texture2D> texture = m_pTextComponent->GetTexture();
-	Transform transform = GetOwner()->GetPosition();
+	Transform transform = GetOwner()->GetTransform();
 
 	Renderer::GetInstance().RenderTexture(*texture.get(), transform.GetPosition().x, transform.GetPosition().y);
 }

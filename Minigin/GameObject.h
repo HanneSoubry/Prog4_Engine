@@ -11,14 +11,16 @@ namespace dae
 	class Texture2D;
 	class BaseComponent;
 
-	class GameObject final
+	class GameObject final : public std::enable_shared_from_this<GameObject>
 	{
 	public:
 		virtual void Update();
 		virtual void Render() const;
 
 		void SetPosition(float x, float y);
-		Transform GetPosition() { return m_transform; }
+		Transform GetTransform();
+
+		void SetParent(std::shared_ptr<GameObject> pParent, bool worldPositionStays = false);
 
 		template <typename T> std::shared_ptr<T> AddComponent(std::shared_ptr<GameObject> thisGameObject);
 		template <typename T> void RemoveComponent();
@@ -33,8 +35,19 @@ namespace dae
 		GameObject& operator=(GameObject&& other) = delete;
 
 	private:
-		Transform m_transform{};
+		Transform m_LocalTransform{};
+		Transform m_WorldTransform{};
+		bool m_PositionDirty{};
+		std::weak_ptr<GameObject> m_pParent{};
+
 		std::vector<std::shared_ptr<BaseComponent>> m_pComponents;
+		std::vector<std::shared_ptr<GameObject>> m_pChildren;
+
+		void RemoveChild(std::shared_ptr<GameObject> pChild);
+		void AddChild(std::shared_ptr<GameObject> pChild);
+
+		void SetPositionDirty();
+		bool IsOneOfChildren(std::shared_ptr<GameObject> pChild);
 	};
 
 	template<typename T>

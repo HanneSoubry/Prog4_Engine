@@ -185,6 +185,7 @@
     <ClInclude Include="RenderTextComponent.h" />
     <ClInclude Include="RenderTextureComponent.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="RotatorComponent.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="Singleton.h" />
@@ -206,6 +207,7 @@
     <ClCompile Include="RenderTextComponent.cpp" />
     <ClCompile Include="RenderTextureComponent.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="RotatorComponent.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="TextComponent.cpp" />

@@ -22,10 +22,13 @@
     <Filter Include="Components\Base">
       <UniqueIdentifier>{5882920c-a58c-470e-be8e-e3a3c7207718}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\VisualComponents">
+    <Filter Include="Components\Movement">
+      <UniqueIdentifier>{9609c929-1a8f-48fe-8d46-81229e864fa5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Visual">
       <UniqueIdentifier>{436de7b9-460e-4b44-a037-dc58fa8983c1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\OtherComponents">
+    <Filter Include="Components\Other">
       <UniqueIdentifier>{726ea6c6-a7aa-4859-9158-594426566684}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -70,19 +73,22 @@
       <Filter>Components\Base</Filter>
     </ClInclude>
     <ClInclude Include="TextComponent.h">
-      <Filter>Components\VisualComponents</Filter>
+      <Filter>Components\Visual</Filter>
     </ClInclude>
     <ClInclude Include="RenderTextComponent.h">
-      <Filter>Components\VisualComponents</Filter>
+      <Filter>Components\Visual</Filter>
     </ClInclude>
     <ClInclude Include="RenderTextureComponent.h">
-      <Filter>Components\VisualComponents</Filter>
+      <Filter>Components\Visual</Filter>
     </ClInclude>
     <ClInclude Include="TextureComponent.h">
-      <Filter>Components\VisualComponents</Filter>
+      <Filter>Components\Visual</Filter>
     </ClInclude>
     <ClInclude Include="FPSComponent.h">
-      <Filter>Components\OtherComponents</Filter>
+      <Filter>Components\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="RotatorComponent.h">
+      <Filter>Components\Movement</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -126,19 +132,22 @@
       <Filter>Components\Base</Filter>
     </ClCompile>
     <ClCompile Include="RenderTextComponent.cpp">
-      <Filter>Components\VisualComponents</Filter>
+      <Filter>Components\Visual</Filter>
     </ClCompile>
     <ClCompile Include="TextComponent.cpp">
-      <Filter>Components\VisualComponents</Filter>
+      <Filter>Components\Visual</Filter>
     </ClCompile>
     <ClCompile Include="RenderTextureComponent.cpp">
-      <Filter>Components\VisualComponents</Filter>
+      <Filter>Components\Visual</Filter>
     </ClCompile>
     <ClCompile Include="TextureComponent.cpp">
-      <Filter>Components\VisualComponents</Filter>
+      <Filter>Components\Visual</Filter>
     </ClCompile>
     <ClCompile Include="FPSComponent.cpp">
-      <Filter>Components\OtherComponents</Filter>
+      <Filter>Components\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="RotatorComponent.cpp">
+      <Filter>Components\Movement</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
