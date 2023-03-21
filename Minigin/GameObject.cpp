@@ -22,6 +22,14 @@ void dae::GameObject::Render() const
 	}
 }
 
+void dae::GameObject::RenderImGui()
+{
+	for (std::shared_ptr<BaseComponent> comp : m_pComponents)
+	{
+		comp->RenderImGui();
+	}
+}
+
 void dae::GameObject::SetPosition(float x, float y)
 {
 	m_LocalTransform.SetPosition(x, y, 0.0f);

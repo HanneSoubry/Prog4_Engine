@@ -48,10 +48,13 @@ void dae::Renderer::Render()
 	ImGui_ImplSDL2_NewFrame(m_window);
 	ImGui::NewFrame();
 
-	// hint: something should come here :)
-
 	if (m_showDemo)
 		ImGui::ShowDemoWindow(&m_showDemo);
+
+	SceneManager::GetInstance().RenderImGui();
+
+	// hint: something should come here :)
+
 	ImGui::Render();
 	ImGui_ImplOpenGL2_RenderDrawData(ImGui::GetDrawData());
 

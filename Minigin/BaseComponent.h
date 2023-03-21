@@ -17,6 +17,7 @@ namespace dae
 
 		virtual void Update(){}
 		virtual void Render() const {}
+		virtual void RenderImGui() {}
 
 	protected:
 		std::shared_ptr<GameObject> GetOwner() const { return m_pOwner.lock(); } 

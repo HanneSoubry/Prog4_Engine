@@ -34,6 +34,9 @@
     <Filter Include="Imgui">
       <UniqueIdentifier>{fdd8bffa-fe0c-4ca9-875f-80cdac3b57f0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\TrashTheCache">
+      <UniqueIdentifier>{d9065efa-7823-46cb-a0f3-ad965bc624a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ResourceManager.h">
@@ -120,6 +123,12 @@
     <ClInclude Include="..\3rdParty\imgui\imgui_plot.h">
       <Filter>Imgui</Filter>
     </ClInclude>
+    <ClInclude Include="TrashTheCacheIntComponent.h">
+      <Filter>Components\TrashTheCache</Filter>
+    </ClInclude>
+    <ClInclude Include="TrashTheCacheGO3DComponent.h">
+      <Filter>Components\TrashTheCache</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Renderer.cpp">
@@ -202,6 +211,12 @@
     </ClCompile>
     <ClCompile Include="..\3rdParty\imgui\imgui_plot.cpp">
       <Filter>Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="TrashTheCacheIntComponent.cpp">
+      <Filter>Components\TrashTheCache</Filter>
+    </ClCompile>
+    <ClCompile Include="TrashTheCacheGO3DComponent.cpp">
+      <Filter>Components\TrashTheCache</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -14,8 +14,9 @@ namespace dae
 	class GameObject final : public std::enable_shared_from_this<GameObject>
 	{
 	public:
-		virtual void Update();
-		virtual void Render() const;
+		void Update();
+		void Render() const;
+		void RenderImGui();
 
 		void SetPosition(float x, float y);
 		Transform GetTransform();
@@ -28,7 +29,7 @@ namespace dae
 		template <typename T> bool HasComponent();
 
 		GameObject() = default;
-		virtual ~GameObject();
+		~GameObject();
 		GameObject(const GameObject& other) = delete;
 		GameObject(GameObject&& other) = delete;
 		GameObject& operator=(const GameObject& other) = delete;
