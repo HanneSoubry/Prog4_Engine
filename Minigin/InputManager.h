@@ -5,11 +5,14 @@
 #include <map>
 #include <memory>
 #include "Command.h"
+#include <unordered_set>
 
 namespace dae
 {
 	class InputManager final : public Singleton<InputManager>
 	{
+		// Can handle up to 4 controllers and a keyboard
+
 	public:
 		enum class InputAction
 		{
@@ -21,19 +24,19 @@ namespace dae
 			Digital2DAxis	// 4 button value : Left, Right, Up, Down
 		};
 
-		struct ControllerKey
+		struct InputKey
 		{
-			int controllerIndex;
+			int id;
 			std::vector<unsigned int> buttons;
 			InputAction action;
 
 			// required to emplace something in a map
-			bool operator<(const ControllerKey& other) const { return other.controllerIndex < controllerIndex; }
+			bool operator<(const InputKey& other) const { return other.id < id; }
 		};
 
 		bool ProcessInput();
 
-		void BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<Command> pCommand, int id = 0);
+		void BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<Command> pCommand, int id = -1);  // use keyboard by default
 		void BindCommand(unsigned int button, InputAction action, std::unique_ptr<Command> pCommand, int id = 0);
 
 		// command may ask the value
@@ -43,10 +46,17 @@ namespace dae
 
 	private:
 		std::vector<std::unique_ptr<XBoxController>> m_pControllers{};
-		std::multimap<ControllerKey, std::unique_ptr<Command>> m_pCommands{};
+
+		// using multimap to allow multiple commands on the same key
+		std::multimap<InputKey, std::unique_ptr<Command>> m_pCommands{};
 
 		float m_1DAxisValue{};
 		glm::vec2 m_2DAxisValue{};
+
+		// using set to avoid duplicates, does not need to be ordered
+		std::unordered_set<unsigned int> m_KeysUpThisFrame{};
+		std::unordered_set<unsigned int> m_KeysDownThisFrame{};
+		std::unordered_set<unsigned int> m_KeysPressed{};
 	};
 
 }
