@@ -37,6 +37,9 @@
     <Filter Include="Components\TrashTheCache">
       <UniqueIdentifier>{d9065efa-7823-46cb-a0f3-ad965bc624a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{2e47a21f-2abe-488f-86c1-db106dc161ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ResourceManager.h">
@@ -129,6 +132,15 @@
     <ClInclude Include="TrashTheCacheGO3DComponent.h">
       <Filter>Components\TrashTheCache</Filter>
     </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="XBoxController.h">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveCommand.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Renderer.cpp">
@@ -217,6 +229,12 @@
     </ClCompile>
     <ClCompile Include="TrashTheCacheGO3DComponent.cpp">
       <Filter>Components\TrashTheCache</Filter>
+    </ClCompile>
+    <ClCompile Include="XBoxController.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveCommand.cpp">
+      <Filter>GameLoop</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
