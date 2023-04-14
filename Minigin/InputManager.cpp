@@ -4,6 +4,9 @@
 
 bool dae::InputManager::ProcessInput()
 {
+	m_KeysDownThisFrame.clear();
+	m_KeysUpThisFrame.clear();
+
 	// Keyboard events
 	SDL_Event e;
 	while (SDL_PollEvent(&e)) {

@@ -37,7 +37,7 @@ namespace dae
 		bool ProcessInput();
 
 		void BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<Command> pCommand, int id = -1);  // use keyboard by default
-		void BindCommand(unsigned int button, InputAction action, std::unique_ptr<Command> pCommand, int id = 0);
+		void BindCommand(unsigned int button, InputAction action, std::unique_ptr<Command> pCommand, int id = -1);
 
 		// command may ask the value
 		// processInput will set these and then fire the command

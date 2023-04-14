@@ -40,6 +40,15 @@
     <Filter Include="Input">
       <UniqueIdentifier>{2e47a21f-2abe-488f-86c1-db106dc161ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Observer/EventQueue">
+      <UniqueIdentifier>{3935b956-dc24-47a1-a72a-5ad7d1b72130}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Commands">
+      <UniqueIdentifier>{09510660-f54c-4767-9971-506a694be820}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Player">
+      <UniqueIdentifier>{6bc6cc6e-ce00-4616-a8c0-d51296b1f82c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ResourceManager.h">
@@ -132,14 +141,35 @@
     <ClInclude Include="TrashTheCacheGO3DComponent.h">
       <Filter>Components\TrashTheCache</Filter>
     </ClInclude>
-    <ClInclude Include="Command.h">
-      <Filter>Input</Filter>
-    </ClInclude>
     <ClInclude Include="XBoxController.h">
       <Filter>Input</Filter>
     </ClInclude>
+    <ClInclude Include="ObserverAndSubject.h">
+      <Filter>Observer/EventQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
     <ClInclude Include="MoveCommand.h">
-      <Filter>Managers</Filter>
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Events.h">
+      <Filter>Observer/EventQueue</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthComponent.h">
+      <Filter>Components\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="DieCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="StatsDisplayComponent.h">
+      <Filter>Components\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreComponent.h">
+      <Filter>Components\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="IncreaseScoreCommand.h">
+      <Filter>Commands</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -234,7 +264,22 @@
       <Filter>Input</Filter>
     </ClCompile>
     <ClCompile Include="MoveCommand.cpp">
-      <Filter>GameLoop</Filter>
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthComponent.cpp">
+      <Filter>Components\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="DieCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="StatsDisplayComponent.cpp">
+      <Filter>Components\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreComponent.cpp">
+      <Filter>Components\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="IncreaseScoreCommand.cpp">
+      <Filter>Commands</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
