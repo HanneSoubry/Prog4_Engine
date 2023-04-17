@@ -1,6 +1,7 @@
 
 #include "StatsDisplayComponent.h"
 #include "TextComponent.h"
+#include <isteamuserstats.h>
 
 dae::StatsDisplayComponent::StatsDisplayComponent(std::shared_ptr<GameObject> pOwner)
 	:BaseComponent(pOwner)
@@ -47,5 +48,6 @@ void dae::StatsDisplayComponent::Notify(const GameObject&, Event)
 	{
 		std::string text{ m_Label + ": " + std::to_string(*m_pValue) };
 		m_pTextComponent->SetText(text);
+
 	}
 }
