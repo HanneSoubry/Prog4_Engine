@@ -1,7 +1,7 @@
 #include "FPSComponent.h"
 #include "TextComponent.h"
 #include "GameObject.h"
-#include "Time.h"
+#include "GameTime.h"
 #include <cmath>
 #include <string>
 
@@ -12,7 +12,7 @@ dae::FPSComponent::FPSComponent(std::shared_ptr<GameObject> pOwner)
 
 void dae::FPSComponent::Update()
 {
-	m_Time += Time::GetInstance().ElapsedSeconds();
+	m_Time += GameTime::GetInstance().ElapsedSeconds();
 	float maxTime{ 1.f };
 	++m_Frames;	// update called every frame
 

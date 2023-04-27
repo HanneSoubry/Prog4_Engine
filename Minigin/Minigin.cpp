@@ -9,10 +9,9 @@
 #include "SceneManager.h"
 #include "Renderer.h"
 #include "ResourceManager.h"
-#include "Time.h"
+#include "GameTime.h"
 
 #include <iostream>
-#include <steam_api.h>
 
 SDL_Window* g_window{};
 
@@ -86,7 +85,7 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& renderer = Renderer::GetInstance();
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
-	auto& time = Time::GetInstance();
+	auto& time = GameTime::GetInstance();
 
 	bool doContinue = true;
 	const float desiredFPS{ 60.f };
@@ -101,8 +100,6 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		// to ask elapsedSeconds -> Singleton Time
 		sceneManager.Update();
 		renderer.Render();
-
-		SteamAPI_RunCallbacks();
 
 		// sleep if faster than desired fps
 		const auto sleepTime{ time.LastTime() + std::chrono::milliseconds(frameTimeMs) - std::chrono::high_resolution_clock::now() };

@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Commands">
+      <UniqueIdentifier>{7e089cc3-145a-4752-82eb-1116ff270c0d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\TrashTheCache">
+      <UniqueIdentifier>{dcdd35c2-fa27-4272-88df-2eccd3c1fae9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\PlayerStats">
+      <UniqueIdentifier>{c745b43e-c28a-4a7d-9100-befe27c896e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Other">
+      <UniqueIdentifier>{5ace7980-8a16-489b-bcdb-e4b6c45d8406}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BurgerTime.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="TrashTheCacheGO3DComponent.cpp">
+      <Filter>Components\TrashTheCache</Filter>
+    </ClCompile>
+    <ClCompile Include="TrashTheCacheIntComponent.cpp">
+      <Filter>Components\TrashTheCache</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreComponent.cpp">
+      <Filter>Components\PlayerStats</Filter>
+    </ClCompile>
+    <ClCompile Include="StatsDisplayComponent.cpp">
+      <Filter>Components\PlayerStats</Filter>
+    </ClCompile>
+    <ClCompile Include="HealthComponent.cpp">
+      <Filter>Components\PlayerStats</Filter>
+    </ClCompile>
+    <ClCompile Include="RotatorComponent.cpp">
+      <Filter>Components\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="HowToPlayUIComponent.cpp">
+      <Filter>Components\Other</Filter>
+    </ClCompile>
+    <ClCompile Include="DieCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="IncreaseScoreCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TrashTheCacheIntComponent.h">
+      <Filter>Components\TrashTheCache</Filter>
+    </ClInclude>
+    <ClInclude Include="TrashTheCacheGO3DComponent.h">
+      <Filter>Components\TrashTheCache</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreComponent.h">
+      <Filter>Components\PlayerStats</Filter>
+    </ClInclude>
+    <ClInclude Include="StatsDisplayComponent.h">
+      <Filter>Components\PlayerStats</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthComponent.h">
+      <Filter>Components\PlayerStats</Filter>
+    </ClInclude>
+    <ClInclude Include="RotatorComponent.h">
+      <Filter>Components\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="HowToPlayUIComponent.h">
+      <Filter>Components\Other</Filter>
+    </ClInclude>
+    <ClInclude Include="DieCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="IncreaseScoreCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

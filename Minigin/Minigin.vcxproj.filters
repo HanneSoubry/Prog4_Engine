@@ -5,9 +5,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Components">
-      <UniqueIdentifier>{959d7740-e0cd-4fc5-95fd-85a89392aef1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Managers">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
@@ -19,23 +16,8 @@
     <Filter Include="Other">
       <UniqueIdentifier>{11dd7a48-59f3-47e5-88f4-7c57e77e0c7b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\Base">
-      <UniqueIdentifier>{5882920c-a58c-470e-be8e-e3a3c7207718}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Movement">
-      <UniqueIdentifier>{9609c929-1a8f-48fe-8d46-81229e864fa5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Visual">
-      <UniqueIdentifier>{436de7b9-460e-4b44-a037-dc58fa8983c1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\Other">
-      <UniqueIdentifier>{726ea6c6-a7aa-4859-9158-594426566684}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Imgui">
       <UniqueIdentifier>{fdd8bffa-fe0c-4ca9-875f-80cdac3b57f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\TrashTheCache">
-      <UniqueIdentifier>{d9065efa-7823-46cb-a0f3-ad965bc624a9}</UniqueIdentifier>
     </Filter>
     <Filter Include="Input">
       <UniqueIdentifier>{2e47a21f-2abe-488f-86c1-db106dc161ec}</UniqueIdentifier>
@@ -46,8 +28,14 @@
     <Filter Include="Commands">
       <UniqueIdentifier>{09510660-f54c-4767-9971-506a694be820}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\Player">
-      <UniqueIdentifier>{6bc6cc6e-ce00-4616-a8c0-d51296b1f82c}</UniqueIdentifier>
+    <Filter Include="ObjectAndComponents">
+      <UniqueIdentifier>{959d7740-e0cd-4fc5-95fd-85a89392aef1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectAndComponents\Visual">
+      <UniqueIdentifier>{436de7b9-460e-4b44-a037-dc58fa8983c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ObjectAndComponents\Base">
+      <UniqueIdentifier>{8479a265-c186-4545-9e86-0b6442decf04}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -69,7 +57,7 @@
     <ClInclude Include="Singleton.h">
       <Filter>GameLoop</Filter>
     </ClInclude>
-    <ClInclude Include="Time.h">
+    <ClInclude Include="GameTime.h">
       <Filter>GameLoop</Filter>
     </ClInclude>
     <ClInclude Include="Font.h">
@@ -84,29 +72,17 @@
     <ClInclude Include="Texture2D.h">
       <Filter>Other</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>Components\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseComponent.h">
-      <Filter>Components\Base</Filter>
-    </ClInclude>
     <ClInclude Include="TextComponent.h">
-      <Filter>Components\Visual</Filter>
+      <Filter>ObjectAndComponents\Visual</Filter>
     </ClInclude>
     <ClInclude Include="RenderTextComponent.h">
-      <Filter>Components\Visual</Filter>
+      <Filter>ObjectAndComponents\Visual</Filter>
     </ClInclude>
     <ClInclude Include="RenderTextureComponent.h">
-      <Filter>Components\Visual</Filter>
+      <Filter>ObjectAndComponents\Visual</Filter>
     </ClInclude>
     <ClInclude Include="TextureComponent.h">
-      <Filter>Components\Visual</Filter>
-    </ClInclude>
-    <ClInclude Include="FPSComponent.h">
-      <Filter>Components\Other</Filter>
-    </ClInclude>
-    <ClInclude Include="RotatorComponent.h">
-      <Filter>Components\Movement</Filter>
+      <Filter>ObjectAndComponents\Visual</Filter>
     </ClInclude>
     <ClInclude Include="..\3rdParty\imgui\imconfig.h">
       <Filter>Imgui</Filter>
@@ -135,12 +111,6 @@
     <ClInclude Include="..\3rdParty\imgui\imgui_plot.h">
       <Filter>Imgui</Filter>
     </ClInclude>
-    <ClInclude Include="TrashTheCacheIntComponent.h">
-      <Filter>Components\TrashTheCache</Filter>
-    </ClInclude>
-    <ClInclude Include="TrashTheCacheGO3DComponent.h">
-      <Filter>Components\TrashTheCache</Filter>
-    </ClInclude>
     <ClInclude Include="XBoxController.h">
       <Filter>Input</Filter>
     </ClInclude>
@@ -150,26 +120,17 @@
     <ClInclude Include="Command.h">
       <Filter>Commands</Filter>
     </ClInclude>
-    <ClInclude Include="MoveCommand.h">
-      <Filter>Commands</Filter>
-    </ClInclude>
     <ClInclude Include="Events.h">
       <Filter>Observer/EventQueue</Filter>
     </ClInclude>
-    <ClInclude Include="HealthComponent.h">
-      <Filter>Components\Player</Filter>
+    <ClInclude Include="BaseComponent.h">
+      <Filter>ObjectAndComponents\Base</Filter>
     </ClInclude>
-    <ClInclude Include="DieCommand.h">
-      <Filter>Commands</Filter>
+    <ClInclude Include="GameObject.h">
+      <Filter>ObjectAndComponents\Base</Filter>
     </ClInclude>
-    <ClInclude Include="StatsDisplayComponent.h">
-      <Filter>Components\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="ScoreComponent.h">
-      <Filter>Components\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="IncreaseScoreCommand.h">
-      <Filter>Commands</Filter>
+    <ClInclude Include="FPSComponent.h">
+      <Filter>ObjectAndComponents\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -179,13 +140,10 @@
     <ClCompile Include="Scene.cpp">
       <Filter>GameLoop</Filter>
     </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>GameLoop</Filter>
-    </ClCompile>
     <ClCompile Include="Minigin.cpp">
       <Filter>GameLoop</Filter>
     </ClCompile>
-    <ClCompile Include="Time.cpp">
+    <ClCompile Include="GameTime.cpp">
       <Filter>GameLoop</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
@@ -206,29 +164,17 @@
     <ClCompile Include="Transform.cpp">
       <Filter>Other</Filter>
     </ClCompile>
-    <ClCompile Include="BaseComponent.cpp">
-      <Filter>Components\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>Components\Base</Filter>
-    </ClCompile>
     <ClCompile Include="RenderTextComponent.cpp">
-      <Filter>Components\Visual</Filter>
+      <Filter>ObjectAndComponents\Visual</Filter>
     </ClCompile>
     <ClCompile Include="TextComponent.cpp">
-      <Filter>Components\Visual</Filter>
+      <Filter>ObjectAndComponents\Visual</Filter>
     </ClCompile>
     <ClCompile Include="RenderTextureComponent.cpp">
-      <Filter>Components\Visual</Filter>
+      <Filter>ObjectAndComponents\Visual</Filter>
     </ClCompile>
     <ClCompile Include="TextureComponent.cpp">
-      <Filter>Components\Visual</Filter>
-    </ClCompile>
-    <ClCompile Include="FPSComponent.cpp">
-      <Filter>Components\Other</Filter>
-    </ClCompile>
-    <ClCompile Include="RotatorComponent.cpp">
-      <Filter>Components\Movement</Filter>
+      <Filter>ObjectAndComponents\Visual</Filter>
     </ClCompile>
     <ClCompile Include="..\3rdParty\imgui\imgui_widgets.cpp">
       <Filter>Imgui</Filter>
@@ -254,32 +200,17 @@
     <ClCompile Include="..\3rdParty\imgui\imgui_plot.cpp">
       <Filter>Imgui</Filter>
     </ClCompile>
-    <ClCompile Include="TrashTheCacheIntComponent.cpp">
-      <Filter>Components\TrashTheCache</Filter>
-    </ClCompile>
-    <ClCompile Include="TrashTheCacheGO3DComponent.cpp">
-      <Filter>Components\TrashTheCache</Filter>
-    </ClCompile>
     <ClCompile Include="XBoxController.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="MoveCommand.cpp">
-      <Filter>Commands</Filter>
+    <ClCompile Include="BaseComponent.cpp">
+      <Filter>ObjectAndComponents\Base</Filter>
     </ClCompile>
-    <ClCompile Include="HealthComponent.cpp">
-      <Filter>Components\Player</Filter>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>ObjectAndComponents\Base</Filter>
     </ClCompile>
-    <ClCompile Include="DieCommand.cpp">
-      <Filter>Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="StatsDisplayComponent.cpp">
-      <Filter>Components\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="ScoreComponent.cpp">
-      <Filter>Components\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="IncreaseScoreCommand.cpp">
-      <Filter>Commands</Filter>
+    <ClCompile Include="FPSComponent.cpp">
+      <Filter>ObjectAndComponents\Base</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
