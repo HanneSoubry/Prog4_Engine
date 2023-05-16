@@ -1,5 +1,5 @@
 #pragma once
-#include "Events.h"
+#include "BaseEvent.h"
 #include <vector>
 #include "GameObject.h"
 
@@ -9,7 +9,7 @@ namespace dae
 	{
 	public:
 		virtual ~Observer() = default;
-		virtual void Notify(const GameObject& actor, Event event) = 0;
+		virtual void Notify(std::shared_ptr<Event> event) = 0;
 	};
 
 	class Subject
@@ -32,11 +32,11 @@ namespace dae
 		}
 
 	protected:
-		void Notify(const GameObject& actor, Event event)
+		void Notify(std::shared_ptr<Event> event)
 		{
 			for (Observer* observer : m_pObservers)
 			{
-				observer->Notify(actor, event);
+				observer->Notify(event);
 			}
 		}
 

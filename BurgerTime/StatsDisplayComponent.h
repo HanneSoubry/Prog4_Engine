@@ -22,13 +22,14 @@ namespace dae
 		void SetValuePtr(int* value);
 		void SetLabel(const std::string& label);
 
-		virtual void Notify(const GameObject& actor, Event event) override;
+		virtual void Notify(std::shared_ptr<Event> event) override;
 
 	private:
 		std::string m_Label{ "" };
 		int* m_pValue{ nullptr };
 		bool m_ValueSet{ false };
 
+		// TODO: not needed without achievements
 		bool m_ReachedScore500{ false };
 
 		std::shared_ptr<TextComponent> m_pTextComponent{ nullptr };

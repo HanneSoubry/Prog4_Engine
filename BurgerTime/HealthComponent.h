@@ -14,7 +14,6 @@ namespace dae
 		HealthComponent& operator=(const HealthComponent& other) = delete;
 		HealthComponent& operator=(HealthComponent&& other) = delete;
 
-		void SetDieEvent(Event event);
 		void SetLives(int lives);
 
 		int* GetLivesPtr();
@@ -23,8 +22,5 @@ namespace dae
 	private:
 
 		int m_Lives{};
-		bool m_EventSet = false;
-		// could be playerDied, enemyDied...
-		Event m_DieEvent{};
 	};
 }

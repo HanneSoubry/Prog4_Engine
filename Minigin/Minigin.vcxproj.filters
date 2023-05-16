@@ -37,6 +37,9 @@
     <Filter Include="ObjectAndComponents\Base">
       <UniqueIdentifier>{8479a265-c186-4545-9e86-0b6442decf04}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{9dda1296-4946-47a5-be9d-ceda1c3ddad0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ResourceManager.h">
@@ -120,7 +123,7 @@
     <ClInclude Include="Command.h">
       <Filter>Commands</Filter>
     </ClInclude>
-    <ClInclude Include="Events.h">
+    <ClInclude Include="BaseEvent.h">
       <Filter>Observer/EventQueue</Filter>
     </ClInclude>
     <ClInclude Include="BaseComponent.h">
@@ -131,6 +134,15 @@
     </ClInclude>
     <ClInclude Include="FPSComponent.h">
       <Filter>ObjectAndComponents\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundSystemInterface.h">
+      <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="ServiceLocator.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="SdlSoundSystem.h">
+      <Filter>Sound</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -211,6 +223,12 @@
     </ClCompile>
     <ClCompile Include="FPSComponent.cpp">
       <Filter>ObjectAndComponents\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="ServiceLocator.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="SdlSoundSystem.cpp">
+      <Filter>Sound</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

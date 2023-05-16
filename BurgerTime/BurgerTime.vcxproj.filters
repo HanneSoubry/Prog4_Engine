@@ -25,6 +25,9 @@
     <Filter Include="Components\Other">
       <UniqueIdentifier>{5ace7980-8a16-489b-bcdb-e4b6c45d8406}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Events">
+      <UniqueIdentifier>{d3d77db5-ca9b-4870-89e4-f4dbc253c2ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BurgerTime.cpp">
@@ -60,6 +63,9 @@
     <ClCompile Include="MoveCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
+    <ClCompile Include="TestSoundCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TrashTheCacheIntComponent.h">
@@ -90,6 +96,12 @@
       <Filter>Commands</Filter>
     </ClInclude>
     <ClInclude Include="MoveCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="BurgerTimeEvents.h">
+      <Filter>Events</Filter>
+    </ClInclude>
+    <ClInclude Include="TestSoundCommand.h">
       <Filter>Commands</Filter>
     </ClInclude>
   </ItemGroup>

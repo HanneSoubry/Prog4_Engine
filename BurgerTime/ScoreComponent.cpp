@@ -1,30 +1,25 @@
 #include "ScoreComponent.h"
+#include "BurgerTimeEvents.h"
 
 dae::ScoreComponent::ScoreComponent(std::shared_ptr<GameObject> pOwner)
 	: BaseComponent(pOwner)
 {
 }
 
-void dae::ScoreComponent::SetEvent(Event event)
-{
-	m_Event = event;
-	m_EventSet = true;
-}
-
 void dae::ScoreComponent::SetScore(int score)
 {
 	m_Score = score;
 
-	if (m_EventSet)
-		Notify(*GetOwner().get(), m_Event);
+	std::shared_ptr<Event> event{ new EventScoreChanged(score, true) };
+	Notify(event);
 }
 
 void dae::ScoreComponent::IncreaseScore(int points)
 {
 	m_Score += points;
 
-	if (m_EventSet)
-		Notify(*GetOwner().get(), m_Event);
+	std::shared_ptr<Event> event{ new EventScoreChanged(points) };
+	Notify(event);
 }
 
 int* dae::ScoreComponent::GetScorePtr()

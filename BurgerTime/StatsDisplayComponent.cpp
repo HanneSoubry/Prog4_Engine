@@ -1,6 +1,8 @@
 
 #include "StatsDisplayComponent.h"
 #include "TextComponent.h"
+#include "BurgerTimeEvents.h"
+#include <memory>
 
 dae::StatsDisplayComponent::StatsDisplayComponent(std::shared_ptr<GameObject> pOwner)
 	:BaseComponent(pOwner)
@@ -41,14 +43,16 @@ void dae::StatsDisplayComponent::SetLabel(const std::string& label)
 	}
 }
 
-void dae::StatsDisplayComponent::Notify(const GameObject&, Event event)
+void dae::StatsDisplayComponent::Notify(std::shared_ptr<Event> event)
 {
 	if (m_ValueSet)
 	{
 		std::string text{ m_Label + ": " + std::to_string(*m_pValue) };
 		m_pTextComponent->SetText(text);
 
-		if(event == Event::PlayerScoreChanged && m_ReachedScore500 == false && *m_pValue >= 500)
+		// dynamic cast returns nullptr if pointer cast fails
+		auto castedEvent{ dynamic_cast<EventScoreChanged*>(event.get()) };
+		if(castedEvent != nullptr && m_ReachedScore500 == false && *m_pValue >= 500)
 		{
 			m_ReachedScore500 = true;
 		}

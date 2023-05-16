@@ -16,6 +16,7 @@
 #include "MoveCommand.h"
 #include "DieCommand.h"
 #include "IncreaseScoreCommand.h"
+#include "TestSoundCommand.h"
 
 #include "TextComponent.h"
 #include "RenderTextComponent.h"
@@ -29,6 +30,9 @@
 #include "StatsDisplayComponent.h"
 #include "ScoreComponent.h"
 #include "HowToPlayUIComponent.h"
+
+#include "ServiceLocator.h"
+#include "SdlSoundSystem.h"
 
 #include <memory>
 #include <iostream>
@@ -55,6 +59,16 @@ void load()
 	//AddInputTest(scene);					
 	//Add2MovableCharacters(scene);			// movement input
 	Add2PlayableCharacters(scene);			// observer & event queue
+
+	// Gives link errors ???
+	//std::shared_ptr<SoundSystem> soundSystem;
+	//soundSystem.reset(new SdlSoundSystem());
+	//ServiceLocator::RegisterSoundSystem(soundSystem);
+	//
+	//auto ss = ServiceLocator::GetSoundSystem();
+	//ss->LoadSound("Data/SfxJump.wav");
+	//ss->Play("Data/SfxJump.wav", 10);
+	//InputManager::GetInstance().BindCommand(SDLK_k, InputManager::InputAction::Down, std::make_unique<TestSoundCommand>(nullptr));
 }
 
 void AddBackground(Scene& scene)
@@ -260,14 +274,12 @@ void Add2PlayableCharacters(Scene& scene)
 
 	// Lives
 	auto healthComp = hotDog->AddComponent<HealthComponent>(hotDog);
-	healthComp->SetDieEvent(Event::PlayerDied);
 	healthComp->SetLives(5);
 
 	InputManager::GetInstance().BindCommand(SDLK_e, InputManager::InputAction::Down, std::make_unique<DieCommand>(hotDog.get()));
 
 	// Points
 	auto scoreComp = hotDog->AddComponent<ScoreComponent>(hotDog);
-	scoreComp->SetEvent(Event::PlayerScoreChanged);
 	scoreComp->SetScore(0);
 
 	InputManager::GetInstance().BindCommand(SDLK_q, InputManager::InputAction::Down, std::make_unique<IncreaseScoreCommand>(hotDog.get(), 100));
@@ -331,14 +343,12 @@ void Add2PlayableCharacters(Scene& scene)
 
 	// Lives
 	healthComp = pickle->AddComponent<HealthComponent>(pickle);
-	healthComp->SetDieEvent(Event::PlayerDied);
 	healthComp->SetLives(5);
 
 	InputManager::GetInstance().BindCommand(static_cast<unsigned int>(XBoxController::LeftShoulder), InputManager::InputAction::Down, std::make_unique<DieCommand>(pickle.get()), 0);
 
 	// Points
 	scoreComp = pickle->AddComponent<ScoreComponent>(pickle);
-	scoreComp->SetEvent(Event::PlayerScoreChanged);
 	scoreComp->SetScore(0);
 
 	InputManager::GetInstance().BindCommand(static_cast<unsigned int>(XBoxController::RightShoulder), InputManager::InputAction::Down, std::make_unique<IncreaseScoreCommand>(pickle.get(), 100), 0);

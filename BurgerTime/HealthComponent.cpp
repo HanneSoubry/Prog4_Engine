@@ -1,15 +1,10 @@
 #include "HealthComponent.h"
 #include "GameObject.h"
+#include "BurgerTimeEvents.h"
 
 dae::HealthComponent::HealthComponent(std::shared_ptr<GameObject> pOwner)
 	: BaseComponent(pOwner)
 {
-}
-
-void dae::HealthComponent::SetDieEvent(Event event)
-{
-	m_DieEvent = event;
-	m_EventSet = true;
 }
 
 void dae::HealthComponent::SetLives(int lives)
@@ -37,6 +32,6 @@ void dae::HealthComponent::Die()
 	// if(m_Lives == 0)
 	// game over?
 
-	if(m_EventSet)
-		Notify(*GetOwner().get(), m_DieEvent);
+	std::shared_ptr<Event> event{ new EventDamaged(1) };
+	Notify(event);
 }
