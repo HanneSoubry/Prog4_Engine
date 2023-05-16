@@ -52,7 +52,7 @@ public:
 
 	void LoadSounds(const std::vector<std::string>& filePaths)
 	{
-		for (int i{}; i < filePaths.size(); ++i)
+		for (int i{}; i < static_cast<int>(filePaths.size()); ++i)
 		{
 			LoadSound(filePaths[i]);
 		}
