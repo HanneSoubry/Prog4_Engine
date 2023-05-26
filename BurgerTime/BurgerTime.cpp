@@ -61,13 +61,13 @@ void load()
 	Add2PlayableCharacters(scene);			// observer & event queue
 
 	// Gives link errors ???
-	//std::shared_ptr<SoundSystem> soundSystem;
-	//soundSystem.reset(new SdlSoundSystem());
-	//ServiceLocator::RegisterSoundSystem(soundSystem);
-	//
-	//auto ss = ServiceLocator::GetSoundSystem();
-	//ss->LoadSound("Data/SfxJump.wav");
-	//ss->Play("Data/SfxJump.wav", 10);
+	std::shared_ptr<SoundSystem> soundSystem;
+	soundSystem.reset(new SdlSoundSystem());
+	ServiceLocator::RegisterSoundSystem(soundSystem);
+	
+	auto ss = ServiceLocator::GetSoundSystem();
+	ss->LoadSound("Data/SfxJump.wav");
+	ss->Play("Data/SfxJump.wav", 10);
 	//InputManager::GetInstance().BindCommand(SDLK_k, InputManager::InputAction::Down, std::make_unique<TestSoundCommand>(nullptr));
 }
 

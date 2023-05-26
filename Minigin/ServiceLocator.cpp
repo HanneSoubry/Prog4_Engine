@@ -2,6 +2,9 @@
 
 using namespace dae;
 
+std::shared_ptr<SoundSystem> ServiceLocator::m_pSoundSystem{ nullptr };
+std::shared_ptr<SoundSystem> ServiceLocator::m_pDefaultSoundSystem{ nullptr };
+
 SoundSystem* ServiceLocator::GetSoundSystem()
 {
 	if (m_pSoundSystem != nullptr) 
