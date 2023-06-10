@@ -8,7 +8,7 @@ namespace dae
 	class ScoreComponent : public Subject, public BaseComponent
 	{
 	public:
-		ScoreComponent(std::shared_ptr<GameObject> pOwner);
+		ScoreComponent(GameObject* pOwner);
 		virtual ~ScoreComponent() = default;
 		ScoreComponent(const ScoreComponent& other) = delete;
 		ScoreComponent(ScoreComponent&& other) = delete;

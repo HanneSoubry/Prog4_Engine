@@ -5,46 +5,46 @@ using namespace dae;
 
 unsigned int Scene::m_idCounter = 0;
 
-Scene::Scene(const std::string& name) : m_name(name) {}
+Scene::Scene(const std::string& name) 
+	: m_name(name)
+	, m_pRoot(std::make_unique<GameObject>()) 
+{}
 
 Scene::~Scene() = default;
 
-void Scene::Add(std::shared_ptr<GameObject> object)
+GameObject* Scene::Add(std::unique_ptr<GameObject> object)
 {
-	m_objects.emplace_back(std::move(object));
+	auto child = object.get();
+	m_pRoot->MakeRootParent(std::move(object), true);
+	return child;
 }
 
-void Scene::Remove(std::shared_ptr<GameObject> object)
+std::unique_ptr<GameObject> Scene::Remove(GameObject* object)
 {
-	m_objects.erase(std::remove(m_objects.begin(), m_objects.end(), object), m_objects.end());
+	// give back the object
+	return m_pRoot->RemoveFromParent(object, true);
 }
 
-void Scene::RemoveAll()
+void Scene::DeleteAll()
 {
-	m_objects.clear();
+	// make new empty root object
+	// unique ptr will call destructor for previous root
+	// all children are unique ptrs too (-> also destroyed)
+	m_pRoot = std::make_unique<GameObject>();
 }
 
 void Scene::Update()
 {
-	for(auto& object : m_objects)
-	{
-		object->Update();
-	}
+	m_pRoot->Update();
 }
 
 void Scene::Render() const
 {
-	for (const auto& object : m_objects)
-	{
-		object->Render();
-	}
+	m_pRoot->Render();
 }
 
 void dae::Scene::RenderImGui()
 {
-	for (const auto& object : m_objects)
-	{
-		object->RenderImGui();
-	}
+	m_pRoot->RenderImGui();
 }
 

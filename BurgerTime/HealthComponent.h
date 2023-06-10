@@ -7,7 +7,7 @@ namespace dae
 	class HealthComponent : public Subject, public BaseComponent
 	{
 	public:
-		HealthComponent(std::shared_ptr<GameObject> pOwner);
+		HealthComponent(GameObject* pOwner);
 		virtual ~HealthComponent() = default;
 		HealthComponent(const HealthComponent& other) = delete;
 		HealthComponent(HealthComponent&& other) = delete;

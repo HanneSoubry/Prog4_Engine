@@ -9,7 +9,7 @@ namespace dae
 	class RenderTextComponent final : public BaseComponent
 	{
 	public:
-		RenderTextComponent(std::shared_ptr<GameObject> pOwner);
+		RenderTextComponent(GameObject* pOwner);
 		virtual ~RenderTextComponent() override = default;
 		RenderTextComponent(const RenderTextComponent& other) = delete;
 		RenderTextComponent(RenderTextComponent&& other) = delete;
@@ -17,9 +17,9 @@ namespace dae
 		RenderTextComponent& operator=(RenderTextComponent&& other) = delete;
 
 		virtual void Render() const override;
-		void SetTextToRender(std::shared_ptr<TextComponent> textComp);
+		void SetTextToRender(TextComponent* textComp);
 
 	private:
-		std::shared_ptr<TextComponent> m_pTextComponent{ nullptr };
+		TextComponent* m_pTextComponent{ nullptr };
 	};
 }

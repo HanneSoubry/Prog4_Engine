@@ -3,7 +3,7 @@
 #include "TextureComponent.h"
 #include "Renderer.h"
 
-dae::RenderTextureComponent::RenderTextureComponent(std::shared_ptr<GameObject> pOwner)
+dae::RenderTextureComponent::RenderTextureComponent(GameObject* pOwner)
 	:BaseComponent(pOwner)
 {
 }
@@ -19,7 +19,7 @@ void dae::RenderTextureComponent::Render() const
 	Renderer::GetInstance().RenderTexture(*texture.get(), transform.GetPosition().x, transform.GetPosition().y);
 }
 
-void dae::RenderTextureComponent::SetTextureToRender(std::shared_ptr<TextureComponent> textureComp)
+void dae::RenderTextureComponent::SetTextureToRender(TextureComponent* textureComp)
 {
 	m_pTextureComponent = textureComp;
 }

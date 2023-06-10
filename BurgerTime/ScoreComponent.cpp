@@ -1,7 +1,7 @@
 #include "ScoreComponent.h"
 #include "BurgerTimeEvents.h"
 
-dae::ScoreComponent::ScoreComponent(std::shared_ptr<GameObject> pOwner)
+dae::ScoreComponent::ScoreComponent(GameObject* pOwner)
 	: BaseComponent(pOwner)
 {
 }

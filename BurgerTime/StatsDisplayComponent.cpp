@@ -4,12 +4,12 @@
 #include "BurgerTimeEvents.h"
 #include <memory>
 
-dae::StatsDisplayComponent::StatsDisplayComponent(std::shared_ptr<GameObject> pOwner)
+dae::StatsDisplayComponent::StatsDisplayComponent(GameObject* pOwner)
 	:BaseComponent(pOwner)
 {
 }
 
-void dae::StatsDisplayComponent::SetTextTarget(std::shared_ptr<TextComponent> textComp)
+void dae::StatsDisplayComponent::SetTextTarget(TextComponent* textComp)
 {
 	m_pTextComponent = textComp;
 

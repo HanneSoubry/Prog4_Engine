@@ -32,7 +32,7 @@ namespace dae
 	class TrashTheCacheGO3DComponent final : public BaseComponent
 	{
 	public:
-		TrashTheCacheGO3DComponent(std::shared_ptr<GameObject> pOwner);
+		TrashTheCacheGO3DComponent(GameObject* pOwner);
 		virtual ~TrashTheCacheGO3DComponent() override;
 		TrashTheCacheGO3DComponent(const TrashTheCacheGO3DComponent& other) = delete;
 		TrashTheCacheGO3DComponent(TrashTheCacheGO3DComponent&& other) = delete;

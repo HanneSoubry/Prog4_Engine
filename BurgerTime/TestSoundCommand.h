@@ -22,7 +22,7 @@ namespace dae
 		virtual void Execute() override;
 
 	private:
-		std::string soundPath = "Data/SfxJump.wav";
+		std::string soundPath = "../Data/SfxJump.wav";
 	};
 
 }

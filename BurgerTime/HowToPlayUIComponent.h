@@ -7,7 +7,7 @@ namespace dae
 	class HowToPlayUIComponent final : public BaseComponent
 	{
 	public:
-		HowToPlayUIComponent(std::shared_ptr<GameObject> pOwner);
+		HowToPlayUIComponent(GameObject* pOwner);
 		virtual ~HowToPlayUIComponent() override = default;
 		HowToPlayUIComponent(const HowToPlayUIComponent& other) = delete;
 		HowToPlayUIComponent(HowToPlayUIComponent&& other) = delete;

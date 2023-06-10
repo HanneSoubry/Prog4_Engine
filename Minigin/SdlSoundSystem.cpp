@@ -29,7 +29,7 @@ public:
 
 		if (sound != nullptr)
 		{
-			Mix_PlayChannel(-1, sound, 1);
+			Mix_PlayChannel(-1, sound, 0);
 		}
 	}
 

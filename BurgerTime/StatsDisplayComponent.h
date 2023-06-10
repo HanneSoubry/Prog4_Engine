@@ -11,14 +11,14 @@ namespace dae
 	class StatsDisplayComponent final : public BaseComponent, public Observer
 	{
 	public:
-		StatsDisplayComponent(std::shared_ptr<GameObject> pOwner);
+		StatsDisplayComponent(GameObject* pOwner);
 		virtual ~StatsDisplayComponent() override = default;
 		StatsDisplayComponent(const StatsDisplayComponent& other) = delete;
 		StatsDisplayComponent(StatsDisplayComponent&& other) = delete;
 		StatsDisplayComponent& operator=(const StatsDisplayComponent& other) = delete;
 		StatsDisplayComponent& operator=(StatsDisplayComponent&& other) = delete;
 
-		void SetTextTarget(std::shared_ptr<TextComponent> textComp);
+		void SetTextTarget(TextComponent* textComp);
 		void SetValuePtr(int* value);
 		void SetLabel(const std::string& label);
 
@@ -32,6 +32,6 @@ namespace dae
 		// TODO: not needed without achievements
 		bool m_ReachedScore500{ false };
 
-		std::shared_ptr<TextComponent> m_pTextComponent{ nullptr };
+		TextComponent* m_pTextComponent{ nullptr };
 	};
 }

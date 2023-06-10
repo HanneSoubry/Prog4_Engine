@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "GameTime.h"
 
-dae::RotatorComponent::RotatorComponent(std::shared_ptr<GameObject> pOwner)
+dae::RotatorComponent::RotatorComponent(GameObject* pOwner)
 	:BaseComponent(pOwner)
 {
 }

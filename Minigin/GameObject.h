@@ -11,7 +11,7 @@ namespace dae
 	class Texture2D;
 	class BaseComponent;
 
-	class GameObject final : public std::enable_shared_from_this<GameObject>
+	class GameObject final
 	{
 	public:
 		void Update();
@@ -21,11 +21,16 @@ namespace dae
 		void SetPosition(float x, float y);
 		Transform GetTransform();
 
-		void SetParent(std::shared_ptr<GameObject> pParent, bool worldPositionStays = false);
+		void ChangeParent(GameObject* pParent, bool worldPositionStays = false);
+		void MakeRootParent(std::unique_ptr<GameObject> pChildGameObject, bool worldPositionStays = false);
+			// get the child back
+		std::unique_ptr<GameObject> RemoveFromParent(GameObject* pChild, bool worldPositionStays = false);
+			// delete the child
+		void RemoveGameObject();
 
-		template <typename T> std::shared_ptr<T> AddComponent(std::shared_ptr<GameObject> thisGameObject);
+		template <typename T> T* AddComponent(GameObject* thisGameObject);
 		template <typename T> void RemoveComponent();
-		template <typename T> std::shared_ptr<T> GetComponent();
+		template <typename T> T* GetComponent();
 		template <typename T> bool HasComponent();
 
 		GameObject() = default;
@@ -39,26 +44,28 @@ namespace dae
 		Transform m_LocalTransform{};
 		Transform m_WorldTransform{};
 		bool m_PositionDirty{};
-		std::weak_ptr<GameObject> m_pParent{};
 
-		std::vector<std::shared_ptr<BaseComponent>> m_pComponents;
-		std::vector<std::shared_ptr<GameObject>> m_pChildren;
+		GameObject* m_pParent{};
 
-		void RemoveChild(std::shared_ptr<GameObject> pChild);
-		void AddChild(std::shared_ptr<GameObject> pChild);
+		std::vector<std::unique_ptr<BaseComponent>> m_pComponents;
+		std::vector<std::unique_ptr<GameObject>> m_pChildren;
+
+		std::unique_ptr<GameObject> RemoveChild(GameObject* pChild);
+		void AddChild(std::unique_ptr<GameObject> pChild);
 
 		void SetPositionDirty();
-		bool IsOneOfChildren(std::shared_ptr<GameObject> pChild);
+		bool IsOneOfChildren(GameObject* pChild);
 	};
 
 	template<typename T>
-	inline std::shared_ptr<T> GameObject::AddComponent(std::shared_ptr<GameObject> thisGameObject)
+	inline T* GameObject::AddComponent(GameObject* thisGameObject)
 	{
 		// should have only one component from the same type
 		bool componentTypeExists = false;
-		for (std::shared_ptr<BaseComponent> comp : m_pComponents)
+		const int amount{ static_cast<int>(m_pComponents.size()) };
+		for (int i{ 0 }; i < amount; ++i)
 		{
-			if (typeid(comp) == typeid(std::shared_ptr<T>))
+			if (typeid(m_pComponents[i]) == typeid(std::unique_ptr<T>))
 			{
 				componentTypeExists = true;
 				break;
@@ -67,8 +74,8 @@ namespace dae
 		
 		if (!componentTypeExists)
 		{
-			m_pComponents.push_back(std::make_shared<T>(thisGameObject));
-			return std::dynamic_pointer_cast<T>(m_pComponents.back());
+			m_pComponents.push_back(std::make_unique<T>(thisGameObject));
+			return dynamic_cast<T*>(m_pComponents.back().get());
 		}
 	
 		return nullptr;
@@ -80,7 +87,7 @@ namespace dae
 		const int amount{ static_cast<int>(m_pComponents.size()) };
 		for (int i{ 0 }; i < amount; ++i)
 		{
-			std::shared_ptr<T> casted = std::dynamic_pointer_cast<T>(m_pComponents[i]);
+			T* casted = dynamic_cast<T*>(m_pComponents[i].get());
 			if (casted != nullptr)	// cast success
 			{
 				m_pComponents.erase(std::remove(m_pComponents.begin(), m_pComponents.end(), m_pComponents[i]));
@@ -89,14 +96,14 @@ namespace dae
 	}
 
 	template<typename T>
-	inline std::shared_ptr<T> GameObject::GetComponent()
+	inline T* GameObject::GetComponent()
 	{
 		for (int i{ 0 }; i < static_cast<int>(m_pComponents.size()); ++i)
 		{
-			std::shared_ptr<T> casted = std::dynamic_pointer_cast<T>(m_pComponents[i]);
+			T* casted = dynamic_cast<T*>(m_pComponents[i].get());
 			if (casted != nullptr)	// cast success
 			{
-				return casted;
+				return dynamic_cast<T*>(m_pComponents[i].get());
 			}
 		}
 
@@ -108,7 +115,7 @@ namespace dae
 	{
 		for (int i{ 0 }; i < static_cast<int>(m_pComponents.size()); ++i)
 		{
-			std::shared_ptr<T> casted = std::dynamic_pointer_cast<T>(m_pComponents[i]);
+			T* casted = dynamic_cast<T*>(m_pComponents[i].get());
 			if (casted != nullptr)	// cast success
 			{
 				return true;

@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <chrono>
 
-dae::TrashTheCacheIntComponent::TrashTheCacheIntComponent(std::shared_ptr<GameObject> pOwner)
+dae::TrashTheCacheIntComponent::TrashTheCacheIntComponent(GameObject* pOwner)
 	: BaseComponent(pOwner)
 {
 	m_PlotConfig.grid_y.show = true;

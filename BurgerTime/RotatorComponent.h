@@ -7,7 +7,7 @@ namespace dae
 	class RotatorComponent final : public BaseComponent
 	{
 	public:
-		RotatorComponent(std::shared_ptr<GameObject> pOwner);
+		RotatorComponent(GameObject* pOwner);
 		virtual ~RotatorComponent() override = default;
 		RotatorComponent(const RotatorComponent& other) = delete;
 		RotatorComponent(RotatorComponent&& other) = delete;

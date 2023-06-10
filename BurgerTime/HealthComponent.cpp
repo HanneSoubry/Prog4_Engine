@@ -2,7 +2,7 @@
 #include "GameObject.h"
 #include "BurgerTimeEvents.h"
 
-dae::HealthComponent::HealthComponent(std::shared_ptr<GameObject> pOwner)
+dae::HealthComponent::HealthComponent(GameObject* pOwner)
 	: BaseComponent(pOwner)
 {
 }

@@ -1,7 +1,7 @@
 #include "HowToPlayUIComponent.h"
 #include <imgui.h>
 
-dae::HowToPlayUIComponent::HowToPlayUIComponent(std::shared_ptr<GameObject> pOwner)
+dae::HowToPlayUIComponent::HowToPlayUIComponent(GameObject* pOwner)
 	: BaseComponent(pOwner)
 {
 }

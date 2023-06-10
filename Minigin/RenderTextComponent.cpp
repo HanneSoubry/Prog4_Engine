@@ -3,7 +3,7 @@
 #include "TextComponent.h"
 #include "Renderer.h"
 
-dae::RenderTextComponent::RenderTextComponent(std::shared_ptr<GameObject> pOwner)
+dae::RenderTextComponent::RenderTextComponent(GameObject* pOwner)
 	:BaseComponent(pOwner)
 {
 }
@@ -19,7 +19,7 @@ void dae::RenderTextComponent::Render() const
 	Renderer::GetInstance().RenderTexture(*texture.get(), transform.GetPosition().x, transform.GetPosition().y);
 }
 
-void dae::RenderTextComponent::SetTextToRender(std::shared_ptr<TextComponent> textComp)
+void dae::RenderTextComponent::SetTextToRender(TextComponent* textComp)
 {
 	m_pTextComponent = textComp;
 }

@@ -22,7 +22,7 @@ namespace dae
 		virtual void Execute() override;
 
 	private:
-		std::shared_ptr<ScoreComponent> pScoreComp;
+		ScoreComponent* pScoreComp;
 		int m_pointIncrease = 0;
 	};
 

@@ -22,7 +22,7 @@ namespace dae
 		virtual void Execute() override;
 
 	private:
-		std::shared_ptr<HealthComponent> pHealthComp;
+		HealthComponent* pHealthComp;
 	};
 
 }

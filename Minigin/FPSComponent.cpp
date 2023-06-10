@@ -5,7 +5,7 @@
 #include <cmath>
 #include <string>
 
-dae::FPSComponent::FPSComponent(std::shared_ptr<GameObject> pOwner)
+dae::FPSComponent::FPSComponent(GameObject* pOwner)
 	:BaseComponent(pOwner)
 {
 }
@@ -36,7 +36,7 @@ void dae::FPSComponent::Update()
 	}
 }
 
-void dae::FPSComponent::SetTextTarget(std::shared_ptr<TextComponent> textComp)
+void dae::FPSComponent::SetTextTarget(TextComponent* textComp)
 {
 	m_pTextComponent = textComp;
 }

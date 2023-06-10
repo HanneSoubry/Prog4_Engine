@@ -2,7 +2,7 @@
 #include "ResourceManager.h"
 #include "Texture2D.h"
 
-dae::TextureComponent::TextureComponent(std::shared_ptr<GameObject> pOwner)
+dae::TextureComponent::TextureComponent(GameObject* pOwner)
 	:BaseComponent(pOwner)
 {
 }

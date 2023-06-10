@@ -8,7 +8,7 @@ namespace dae
 	class TrashTheCacheIntComponent final : public BaseComponent
 	{
 	public:
-		TrashTheCacheIntComponent(std::shared_ptr<GameObject> pOwner);
+		TrashTheCacheIntComponent(GameObject* pOwner);
 		virtual ~TrashTheCacheIntComponent() override = default;
 		TrashTheCacheIntComponent(const TrashTheCacheIntComponent& other) = delete;
 		TrashTheCacheIntComponent(TrashTheCacheIntComponent&& other) = delete;

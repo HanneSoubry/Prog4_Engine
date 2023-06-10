@@ -11,7 +11,7 @@ namespace dae
 	class TextComponent final : public BaseComponent
 	{
 	public:
-		TextComponent(std::shared_ptr<GameObject> pOwner);
+		TextComponent(GameObject* pOwner);
 		virtual ~TextComponent() override = default;
 		TextComponent(const TextComponent& other) = delete;
 		TextComponent(TextComponent&& other) = delete;

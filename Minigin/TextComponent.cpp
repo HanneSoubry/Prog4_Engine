@@ -6,7 +6,7 @@
 
 using namespace dae;
 
-dae::TextComponent::TextComponent(std::shared_ptr<GameObject> pOwner)
+dae::TextComponent::TextComponent(GameObject* pOwner)
 	:BaseComponent(pOwner)
 {
 }

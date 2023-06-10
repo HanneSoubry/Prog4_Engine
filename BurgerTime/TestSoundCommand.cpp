@@ -8,5 +8,5 @@ dae::TestSoundCommand::TestSoundCommand(GameObject* pGameObject)
 
 void dae::TestSoundCommand::Execute()
 {
-	//dae::ServiceLocator::GetSoundSystem()->Play(soundPath, 10);
+	dae::ServiceLocator::GetSoundSystem()->Play(soundPath, 10);
 }

@@ -3,7 +3,7 @@
 #include <algorithm>
 #include <chrono>
 
-dae::TrashTheCacheGO3DComponent::TrashTheCacheGO3DComponent(std::shared_ptr<GameObject> pOwner)
+dae::TrashTheCacheGO3DComponent::TrashTheCacheGO3DComponent(GameObject* pOwner)
 	: BaseComponent(pOwner)
 {
 	// plot 1
