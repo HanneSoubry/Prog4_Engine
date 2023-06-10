@@ -8,21 +8,16 @@ namespace dae
 {
 	class GameObject;
 
-	class TestSoundCommand final : public Command
+	class TestSoundCommand final : public BaseCommand
 	{
 	public:
-		TestSoundCommand(GameObject* pGameObject);
+		TestSoundCommand(std::string soundPath);
 		~TestSoundCommand() = default;
-
-		TestSoundCommand(const TestSoundCommand& other) = delete;
-		TestSoundCommand(TestSoundCommand&& other) = delete;
-		TestSoundCommand& operator=(const TestSoundCommand& other) = delete;
-		TestSoundCommand& operator=(TestSoundCommand&& other) = delete;
 
 		virtual void Execute() override;
 
 	private:
-		std::string soundPath = "../Data/SfxJump.wav";
+		std::string m_SoundPath;
 	};
 
 }

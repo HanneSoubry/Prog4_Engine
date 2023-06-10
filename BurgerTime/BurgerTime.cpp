@@ -60,7 +60,7 @@ void load()
 	//AddInputTest(scene);					
 	//Add2MovableCharacters(scene);			// movement input
 	Add2PlayableCharacters(scene);			// observer & event queue
-	TestSound();
+	//TestSound();
 }
 
 void AddBackground(Scene& scene)
@@ -173,14 +173,15 @@ void AddInputTest(Scene& scene)
 	auto renderTextureComp = inputTest->AddComponent<RenderTextureComponent>(inputTest);
 	renderTextureComp->SetTextureToRender(textureComp);
 	
-	std::vector<unsigned int> keys{ static_cast<unsigned int>(SDLK_LEFT),
-									static_cast<unsigned int>(SDLK_RIGHT),
-									static_cast<unsigned int>(SDLK_UP),
-									static_cast<unsigned int>(SDLK_DOWN) };
+	std::vector<unsigned int> keys{ static_cast<unsigned int>(SDL_SCANCODE_LEFT),
+									static_cast<unsigned int>(SDL_SCANCODE_RIGHT),
+									static_cast<unsigned int>(SDL_SCANCODE_UP),
+									static_cast<unsigned int>(SDL_SCANCODE_DOWN) };
 	
+	std::unique_ptr<Command<glm::vec2>> command{ std::move(std::make_unique<MoveCommand>(MoveCommand(inputTest, 100.f))) };
 	InputManager::GetInstance().BindCommand(keys,
 		InputManager::InputAction::Digital2DAxis,
-		std::make_unique<MoveCommand>(inputTest, 100.f));
+		std::move(command));
 
 	//InputManager::GetInstance().BindCommand(static_cast<unsigned int>(XBoxController::ControllerButton::LeftThumb),
 	//										InputManager::InputAction::Analog2DAxis,
@@ -200,14 +201,15 @@ void Add2MovableCharacters(Scene& scene)
 	auto renderTextureComp = hotDog->AddComponent<RenderTextureComponent>(hotDog);
 	renderTextureComp->SetTextureToRender(textureComp);
 	
-	std::vector<unsigned int> keys{ static_cast<unsigned int>(SDLK_a),
-									static_cast<unsigned int>(SDLK_d),
-									static_cast<unsigned int>(SDLK_w),
-									static_cast<unsigned int>(SDLK_s) };
+	std::vector<unsigned int> keys{ static_cast<unsigned int>(SDL_SCANCODE_A),
+									static_cast<unsigned int>(SDL_SCANCODE_D),
+									static_cast<unsigned int>(SDL_SCANCODE_W),
+									static_cast<unsigned int>(SDL_SCANCODE_S) };
 	float speed{ 100.f };
 	
+	std::unique_ptr<Command<glm::vec2>> command{ std::move(std::make_unique<MoveCommand>(MoveCommand(hotDog, speed))) };
 	InputManager::GetInstance().BindCommand(keys, InputManager::InputAction::Digital2DAxis,
-		std::make_unique<MoveCommand>(hotDog, speed));
+		std::move(command));
 	
 	// Mr Pickle
 	auto pickle = scene.Add(std::make_unique<GameObject>());
@@ -224,8 +226,9 @@ void Add2MovableCharacters(Scene& scene)
 			 static_cast<unsigned int>(XBoxController::DPadUp),
 			 static_cast<unsigned int>(XBoxController::DPadDown) };
 	
+	command = std::make_unique<MoveCommand>(MoveCommand(pickle, 2 * speed));
 	InputManager::GetInstance().BindCommand(keys, InputManager::InputAction::Digital2DAxis,
-		std::make_unique<MoveCommand>(pickle, 2 * speed), 0);
+		std::move(command), 0);
 }
 
 void Add2PlayableCharacters(Scene& scene)
@@ -240,26 +243,27 @@ void Add2PlayableCharacters(Scene& scene)
 	auto renderTextureComp = hotDog->AddComponent<RenderTextureComponent>(hotDog);
 	renderTextureComp->SetTextureToRender(textureComp);
 	
-	std::vector<unsigned int> keys{ static_cast<unsigned int>(SDLK_a),
-									static_cast<unsigned int>(SDLK_d),
-									static_cast<unsigned int>(SDLK_w),
-									static_cast<unsigned int>(SDLK_s) };
+	std::vector<unsigned int> keys{ static_cast<unsigned int>(SDL_SCANCODE_A),
+									static_cast<unsigned int>(SDL_SCANCODE_D),
+									static_cast<unsigned int>(SDL_SCANCODE_W),
+									static_cast<unsigned int>(SDL_SCANCODE_S) };
 	float speed{ 100.f };
 	
+	std::unique_ptr<Command<glm::vec2>> command{ std::move(std::make_unique<MoveCommand>(MoveCommand(hotDog, speed))) };
 	InputManager::GetInstance().BindCommand(keys, InputManager::InputAction::Digital2DAxis,
-		std::make_unique<MoveCommand>(hotDog, speed));
+		std::move(command));
 	
 	// Lives
 	auto healthComp = hotDog->AddComponent<HealthComponent>(hotDog);
 	healthComp->SetLives(5);
 	
-	InputManager::GetInstance().BindCommand(SDLK_e, InputManager::InputAction::Down, std::make_unique<DieCommand>(hotDog));
+	InputManager::GetInstance().BindCommand(SDL_SCANCODE_E, InputManager::InputAction::Down, std::make_unique<DieCommand>(hotDog));
 	
 	// Points
 	auto scoreComp = hotDog->AddComponent<ScoreComponent>(hotDog);
 	scoreComp->SetScore(0);
 	
-	InputManager::GetInstance().BindCommand(SDLK_q, InputManager::InputAction::Down, std::make_unique<IncreaseScoreCommand>(hotDog, 100));
+	InputManager::GetInstance().BindCommand(SDL_SCANCODE_Q, InputManager::InputAction::Down, std::make_unique<IncreaseScoreInputCommand>(hotDog, 100));
 	
 	// Stats display
 	auto font = ResourceManager::GetInstance().LoadFont("Lingua.otf", 20);
@@ -312,8 +316,9 @@ void Add2PlayableCharacters(Scene& scene)
 	renderTextureComp = pickle->AddComponent<RenderTextureComponent>(pickle);
 	renderTextureComp->SetTextureToRender(textureComp);
 	
+	command = std::move(std::make_unique<MoveCommand>(MoveCommand(pickle, speed)));
 	InputManager::GetInstance().BindCommand(static_cast<unsigned int>(XBoxController::LeftThumb), InputManager::InputAction::Analog2DAxis,
-		std::make_unique<MoveCommand>(pickle, speed), 0);
+		std::move(command), 0);
 	
 	// Lives
 	healthComp = pickle->AddComponent<HealthComponent>(pickle);
@@ -327,7 +332,7 @@ void Add2PlayableCharacters(Scene& scene)
 	scoreComp->SetScore(0);
 	
 	InputManager::GetInstance().BindCommand(static_cast<unsigned int>(XBoxController::RightShoulder), 
-		InputManager::InputAction::Down, std::make_unique<IncreaseScoreCommand>(pickle, 100), 0);
+		InputManager::InputAction::Down, std::make_unique<IncreaseScoreInputCommand>(pickle, 100), 0);
 	
 	// Stats display
 		// lives
@@ -384,7 +389,7 @@ void TestSound()
 	auto ss = ServiceLocator::GetSoundSystem();
 	ss->LoadSound("../Data/SfxJump.wav");
 	ss->Play("../Data/SfxJump.wav", 10);
-	InputManager::GetInstance().BindCommand(SDLK_k, InputManager::InputAction::Down, std::make_unique<TestSoundCommand>(nullptr));
+	InputManager::GetInstance().BindCommand(SDL_SCANCODE_K, InputManager::InputAction::Down, std::make_unique<TestSoundCommand>("../Data/SfxJump.wav"));
 }
 
 // DON'T TOUCH	

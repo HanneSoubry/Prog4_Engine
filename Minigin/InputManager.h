@@ -21,6 +21,7 @@ namespace dae
 			Up,
 			Analog1DAxis,	// controller triggers
 			Analog2DAxis,	// controller stick value
+			Digital1DAxis,	// 2 button value : Left, Right
 			Digital2DAxis	// 4 button value : Left, Right, Up, Down
 		};
 
@@ -36,27 +37,26 @@ namespace dae
 
 		bool ProcessInput();
 
-		void BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<Command> pCommand, int id = -1);  // use keyboard by default
-		void BindCommand(unsigned int button, InputAction action, std::unique_ptr<Command> pCommand, int id = -1);
-
-		// command may ask the value
-		// processInput will set these and then fire the command
-		float Get1DAxisValue() const { return m_1DAxisValue; }
-		const glm::vec2& Get2DAxisValue() const { return m_2DAxisValue; }
+		void BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<BaseCommand> pCommand, int id = -1);  // use keyboard by default
+		void BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<Command<float>> pCommand, int id = -1);  // use keyboard by default
+		void BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<Command<glm::vec2>> pCommand, int id = -1);  // use keyboard by default
+		void BindCommand(unsigned int button, InputAction action, std::unique_ptr<BaseCommand> pCommand, int id = -1);
+		void BindCommand(unsigned int button, InputAction action, std::unique_ptr<Command<float>> pCommand, int id = -1);
+		void BindCommand(unsigned int button, InputAction action, std::unique_ptr<Command<glm::vec2>> pCommand, int id = -1);
 
 	private:
 		std::vector<std::unique_ptr<XBoxController>> m_pControllers{};
 
 		// using multimap to allow multiple commands on the same key
-		std::multimap<InputKey, std::unique_ptr<Command>> m_pCommands{};
-
-		float m_1DAxisValue{};
-		glm::vec2 m_2DAxisValue{};
+		bool GetInputKey(InputKey& outKey, const std::vector<unsigned int>& buttons, InputAction action, int id = -1);
+		std::multimap<InputKey, std::unique_ptr<BaseCommand>> m_pBaseCommands{};
+		std::multimap<InputKey, std::unique_ptr<Command<float>>> m_p1DValueCommands{};
+		std::multimap<InputKey, std::unique_ptr<Command<glm::vec2>>> m_p2DValueCommands{};
 
 		// using set to avoid duplicates, does not need to be ordered
 		std::unordered_set<unsigned int> m_KeysUpThisFrame{};
 		std::unordered_set<unsigned int> m_KeysDownThisFrame{};
-		std::unordered_set<unsigned int> m_KeysPressed{};
+		const Uint8* m_KeysPressed{};
 	};
 
 }

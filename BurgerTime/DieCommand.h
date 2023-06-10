@@ -8,21 +8,17 @@ namespace dae
 	class GameObject;
 	class HealthComponent;
 
-	class DieCommand final : public Command
+	class DieCommand final : public BaseCommand
 	{
 	public:
 		DieCommand(GameObject* pGameObject);
 		~DieCommand() = default;
 
-		DieCommand(const DieCommand& other) = delete;
-		DieCommand(DieCommand&& other) = delete;
-		DieCommand& operator=(const DieCommand& other) = delete;
-		DieCommand& operator=(DieCommand&& other) = delete;
-
 		virtual void Execute() override;
 
 	private:
-		HealthComponent* pHealthComp;
+		GameObject* m_pGameObject;
+		HealthComponent* m_pHealthComp;
 	};
 
 }

@@ -1,24 +1,22 @@
 #pragma once
 #include "Command.h"
 #include <memory>
+#include <glm/glm.hpp>
+
 namespace dae
 {
 	class GameObject;
 
-	class MoveCommand final : public Command
+	class MoveCommand final : public Command<glm::vec2>
 	{
 	public:
 		MoveCommand(GameObject* pGameObject, float speed);
 		~MoveCommand() = default;
 
-		MoveCommand(const MoveCommand& other) = delete;
-		MoveCommand(MoveCommand&& other) = delete;
-		MoveCommand& operator=(const MoveCommand& other) = delete;
-		MoveCommand& operator=(MoveCommand&& other) = delete;
-
-		virtual void Execute() override;
+		virtual void Execute(const glm::vec2& movementDirection) override;
 
 	private:
+		GameObject* m_pGameObject{};
 		float m_MovementSpeed{};
 	};
 

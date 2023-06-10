@@ -3,12 +3,12 @@
 #include "GameObject.h"
 
 dae::DieCommand::DieCommand(GameObject* pGameObject)
-	: Command(pGameObject)
+	: m_pGameObject(pGameObject)
 {
-	pHealthComp = pGameObject->GetComponent<HealthComponent>();
+	m_pHealthComp = pGameObject->GetComponent<HealthComponent>();
 }
 
 void dae::DieCommand::Execute()
 {
-	pHealthComp->Die();
+	m_pHealthComp->Die();
 }

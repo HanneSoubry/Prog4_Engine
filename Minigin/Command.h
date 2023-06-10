@@ -3,17 +3,22 @@
 namespace dae
 {
 	class GameObject;
-	class Command
+
+	class BaseCommand
 	{
 	public:
-		explicit Command(GameObject* pGameObject) : m_pGameObject{ pGameObject } {}
-		virtual ~Command() = default;
+		explicit BaseCommand() = default;
+		virtual ~BaseCommand() = default;
 		virtual void Execute() = 0;
+	};
 
-	protected:
-		GameObject* GetGameObject() const { return m_pGameObject; }
-
-	private:
-		GameObject* m_pGameObject{};
+	template <typename T>
+	class Command : public BaseCommand
+	{
+	public:
+		explicit Command() = default;
+		virtual ~Command() = default;
+		virtual void Execute() override {};
+		virtual void Execute(const T& commandInfo) = 0;
 	};
 }

@@ -2,13 +2,13 @@
 #include "GameObject.h"
 #include "ScoreComponent.h"
 
-dae::IncreaseScoreCommand::IncreaseScoreCommand(GameObject* pGameObject, int pointIncrease)
-	:Command(pGameObject), m_pointIncrease{pointIncrease}
+dae::IncreaseScoreInputCommand::IncreaseScoreInputCommand(GameObject* pGameObject, int pointIncrease)
+	:m_pGameObject(pGameObject), m_pointIncrease{pointIncrease}
 {
-	pScoreComp = pGameObject->GetComponent<ScoreComponent>();
+	m_pScoreComp = pGameObject->GetComponent<ScoreComponent>();
 }
 
-void dae::IncreaseScoreCommand::Execute()
+void dae::IncreaseScoreInputCommand::Execute()
 {
-	pScoreComp->IncreaseScore(m_pointIncrease);
+	m_pScoreComp->IncreaseScore(m_pointIncrease);
 }

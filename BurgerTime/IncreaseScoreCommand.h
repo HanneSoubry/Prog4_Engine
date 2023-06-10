@@ -8,21 +8,17 @@ namespace dae
 	class GameObject;
 	class ScoreComponent;
 
-	class IncreaseScoreCommand final : public Command
+	class IncreaseScoreInputCommand final : public BaseCommand
 	{
 	public:
-		IncreaseScoreCommand(GameObject* pGameObject, int pointIncrease);
-		~IncreaseScoreCommand() = default;
-
-		IncreaseScoreCommand(const IncreaseScoreCommand& other) = delete;
-		IncreaseScoreCommand(IncreaseScoreCommand&& other) = delete;
-		IncreaseScoreCommand& operator=(const IncreaseScoreCommand& other) = delete;
-		IncreaseScoreCommand& operator=(IncreaseScoreCommand&& other) = delete;
+		IncreaseScoreInputCommand(GameObject* pGameObject, int pointIncrease);
+		~IncreaseScoreInputCommand() = default;
 
 		virtual void Execute() override;
 
 	private:
-		ScoreComponent* pScoreComp;
+		GameObject* m_pGameObject;
+		ScoreComponent* m_pScoreComp;
 		int m_pointIncrease = 0;
 	};
 

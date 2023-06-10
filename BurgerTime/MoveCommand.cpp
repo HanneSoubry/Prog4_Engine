@@ -6,21 +6,20 @@
 using namespace dae;
 
 MoveCommand::MoveCommand(GameObject* pGameObject, float speed)
-	: Command(pGameObject), 
+	: m_pGameObject{ pGameObject },
 	m_MovementSpeed{ speed }
 {
 }
 
-void dae::MoveCommand::Execute()
+void dae::MoveCommand::Execute(const glm::vec2& movementDirection)
 {
 	float elapsedSec = GameTime::GetInstance().ElapsedSeconds();
-	glm::vec2 input = InputManager::GetInstance().Get2DAxisValue();
 
-	glm::vec3 pos = GetGameObject()->GetTransform().GetPosition();
-	pos.x += m_MovementSpeed * elapsedSec * input.x;
-
+	glm::vec3 pos = m_pGameObject->GetTransform().GetPosition();
+	pos.x += m_MovementSpeed * elapsedSec * movementDirection.x;
 	// - y because top of the window is 0, bottom is window height value
-	pos.y -= m_MovementSpeed * elapsedSec * input.y;
+	pos.y -= m_MovementSpeed * elapsedSec * movementDirection.y;
 
-	GetGameObject()->SetPosition(pos.x, pos.y);
+	m_pGameObject->SetPosition(pos.x, pos.y);
 }
+
