@@ -8,5 +8,5 @@ dae::TestSoundCommand::TestSoundCommand(std::string soundPath)
 
 void dae::TestSoundCommand::Execute()
 {
-	dae::ServiceLocator::GetSoundSystem()->Play(m_SoundPath, 10);
+	dae::ServiceLocator::GetSoundSystem()->PlaySound(m_SoundPath, 1, 0);
 }

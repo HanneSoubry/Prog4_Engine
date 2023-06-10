@@ -18,10 +18,18 @@ namespace dae
 		SdlSoundSystem& operator=(const SdlSoundSystem& other) = delete;
 		SdlSoundSystem& operator=(SdlSoundSystem&& other) = delete;
 
-		virtual void Play(const std::string& soundPath, const float volume) override;
+		virtual void PlaySound(const std::string& soundPath, const float volume, int loops) override;
+		virtual void StopAllSounds() override;
+
+		virtual void PlayMusic(const std::string& musicPath, const float volume, bool looping) override;
+		virtual void PauzeMusic() override;
+		virtual void ResumeMusic() override;
+		virtual void StopMusic() override;
+		virtual bool IsMusicPlaying() override;
 
 		virtual void LoadSound(const std::string& filePath) override;
 		virtual void LoadSounds(const std::vector<std::string>& filePaths) override;
+		virtual void LoadMusic(const std::string& filePath) override;
 
 	private:
 		SdlSoundSystemImpl* pImpl;

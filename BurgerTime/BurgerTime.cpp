@@ -60,7 +60,7 @@ void load()
 	//AddInputTest(scene);					
 	//Add2MovableCharacters(scene);			// movement input
 	Add2PlayableCharacters(scene);			// observer & event queue
-	//TestSound();
+	TestSound();
 }
 
 void AddBackground(Scene& scene)
@@ -388,7 +388,6 @@ void TestSound()
 
 	auto ss = ServiceLocator::GetSoundSystem();
 	ss->LoadSound("../Data/SfxJump.wav");
-	ss->Play("../Data/SfxJump.wav", 10);
 	InputManager::GetInstance().BindCommand(SDL_SCANCODE_K, InputManager::InputAction::Down, std::make_unique<TestSoundCommand>("../Data/SfxJump.wav"));
 }
 
