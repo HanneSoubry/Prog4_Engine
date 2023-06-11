@@ -10,7 +10,7 @@ namespace dae
 
 		EventDamaged(int damage)
 			: amount{damage}
-		{ };
+		{ }
 
 		// data (initialize at creation, only read needed for observer)
 		const int amount;
@@ -23,7 +23,7 @@ namespace dae
 
 		EventScoreChanged(int score, bool scoreSet = false)
 			: amount{ score }, isSet{ scoreSet }
-		{ };
+		{ }
 
 		// data
 		const int amount;

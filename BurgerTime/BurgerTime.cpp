@@ -33,6 +33,7 @@
 #include "HowToPlayUIComponent.h"
 #include "LevelLoaderComponent.h"
 #include "RenderLevelTilesComponent.h"
+#include "GameManagerComponent.h"
 
 #include "ServiceLocator.h"
 #include "SdlSoundSystem.h"
@@ -73,16 +74,10 @@ void load()
 
 void CreateLevel1(Scene& scene)
 {
-	int levelPosX{ 120 };
-	int levelPosY{ 90 };
-	scene.Add(std::move(LevelPrefab::Create(levelPosX, levelPosY, true, "../Data/Level/Level1.txt", false)));
-
-	std::vector<unsigned int> keys{ static_cast<unsigned int>(SDL_SCANCODE_A),
-		static_cast<unsigned int>(SDL_SCANCODE_D),
-		static_cast<unsigned int>(SDL_SCANCODE_W),
-		static_cast<unsigned int>(SDL_SCANCODE_S) };
-
-	scene.Add(std::move(PlayerPrefab::Create("ChefPeterPepper.png", { levelPosX, levelPosY }, 100, keys, -1)));
+	auto game = scene.Add(std::move(std::make_unique<GameObject>()));
+	auto manager = game->AddComponent<GameManagerComponent>(game);
+	manager->SetScene(&scene);
+	manager->Initialize();
 }
 
 void AddBackground(Scene& scene)

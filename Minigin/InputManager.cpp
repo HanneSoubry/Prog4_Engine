@@ -42,7 +42,7 @@ bool dae::InputManager::ProcessInput()
 	{
 		bool shouldExecute{ false };
 
-		if (command.first.id == -1) // using keyboard
+		if (command.first.controllerId == -1) // using keyboard
 		{
 			switch (command.first.action)
 			{
@@ -63,15 +63,15 @@ bool dae::InputManager::ProcessInput()
 			switch (command.first.action)
 			{
 			case InputAction::Pressed:
-				shouldExecute = m_pControllers[command.first.id]->IsPressed(command.first.buttons[0]);
+				shouldExecute = m_pControllers[command.first.controllerId]->IsPressed(command.first.buttons[0]);
 				break;
 
 			case InputAction::Down:
-				shouldExecute = m_pControllers[command.first.id]->IsDown(command.first.buttons[0]);
+				shouldExecute = m_pControllers[command.first.controllerId]->IsDown(command.first.buttons[0]);
 				break;
 
 			case InputAction::Up:
-				shouldExecute = m_pControllers[command.first.id]->IsUp(command.first.buttons[0]);
+				shouldExecute = m_pControllers[command.first.controllerId]->IsUp(command.first.buttons[0]);
 				break;
 			}
 		}
@@ -87,7 +87,7 @@ bool dae::InputManager::ProcessInput()
 		bool shouldExecute{ false };
 		float axisValue{ 0 };
 
-		if (command.first.id == -1) // using keyboard
+		if (command.first.controllerId == -1) // using keyboard
 		{
 			switch (command.first.action)
 			{
@@ -110,16 +110,16 @@ bool dae::InputManager::ProcessInput()
 			switch (command.first.action)
 			{
 			case InputAction::Analog1DAxis:
-				axisValue = m_pControllers[command.first.id]->GetAxis(command.first.buttons[0]);
+				axisValue = m_pControllers[command.first.controllerId]->GetAxis(command.first.buttons[0]);
 				shouldExecute = (axisValue != 0);	// should execute if not 0
 				break;
 
 			case InputAction::Digital1DAxis:
-				if (m_pControllers[command.first.id]->IsPressed(command.first.buttons[0])) // left pressed
+				if (m_pControllers[command.first.controllerId]->IsPressed(command.first.buttons[0])) // left pressed
 				{
 					axisValue -= 1;
 				}
-				if (m_pControllers[command.first.id]->IsPressed(command.first.buttons[1])) // right pressed
+				if (m_pControllers[command.first.controllerId]->IsPressed(command.first.buttons[1])) // right pressed
 				{
 					axisValue += 1;
 				}
@@ -140,7 +140,7 @@ bool dae::InputManager::ProcessInput()
 		bool shouldExecute{ false };
 		glm::vec2 axisValue{0, 0};
 
-		if (command.first.id == -1) // using keyboard
+		if (command.first.controllerId == -1) // using keyboard
 		{
 			switch (command.first.action)
 			{
@@ -172,24 +172,24 @@ bool dae::InputManager::ProcessInput()
 			switch (command.first.action)
 			{
 			case InputAction::Analog2DAxis:
-				axisValue = m_pControllers[command.first.id]->Get2DAxis(command.first.buttons[0]);
+				axisValue = m_pControllers[command.first.controllerId]->Get2DAxis(command.first.buttons[0]);
 				shouldExecute = (axisValue.x != 0 || axisValue.y != 0);	// should execute if any input on x, or y, or both
 				break;
 
 			case InputAction::Digital2DAxis:
-				if (m_pControllers[command.first.id]->IsPressed(command.first.buttons[0])) // left pressed
+				if (m_pControllers[command.first.controllerId]->IsPressed(command.first.buttons[0])) // left pressed
 				{
 					axisValue.x -= 1;
 				}
-				if (m_pControllers[command.first.id]->IsPressed(command.first.buttons[1])) // right pressed
+				if (m_pControllers[command.first.controllerId]->IsPressed(command.first.buttons[1])) // right pressed
 				{
 					axisValue.x += 1;
 				}
-				if (m_pControllers[command.first.id]->IsPressed(command.first.buttons[2])) // up pressed
+				if (m_pControllers[command.first.controllerId]->IsPressed(command.first.buttons[2])) // up pressed
 				{
 					axisValue.y += 1;
 				}
-				if (m_pControllers[command.first.id]->IsPressed(command.first.buttons[3])) // down pressed
+				if (m_pControllers[command.first.controllerId]->IsPressed(command.first.buttons[3])) // down pressed
 				{
 					axisValue.y -= 1;
 				}
@@ -208,55 +208,91 @@ bool dae::InputManager::ProcessInput()
 	return true;
 }
 
-void dae::InputManager::BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<BaseCommand> pCommand, int id)
+int dae::InputManager::BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<BaseCommand> pCommand, int id)
 {
 	InputKey key{};
 	if (GetInputKey(key, buttons, action, id))
 	{
 		m_pBaseCommands.emplace(key, std::move(pCommand));
 	}
+
+	return key.inputId;
 }
 
-void dae::InputManager::BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<Command<float>> pCommand, int id)
+int dae::InputManager::BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<Command<float>> pCommand, int id)
 {
 	InputKey key{};
 	if (GetInputKey(key, buttons, action, id))
 	{
 		m_p1DValueCommands.emplace(key, std::move(pCommand));
 	}	
+
+	return key.inputId;
 }
 
-void dae::InputManager::BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<Command<glm::vec2>> pCommand, int id)
+int dae::InputManager::BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<Command<glm::vec2>> pCommand, int id)
 {
 	InputKey key{};
 	if (GetInputKey(key, buttons, action, id))
 	{
 		m_p2DValueCommands.emplace(key, std::move(pCommand));
 	}
+
+	return key.inputId;
 }
 
-void dae::InputManager::BindCommand(unsigned int button, InputAction action, std::unique_ptr<BaseCommand> pCommand, int id)
+int dae::InputManager::BindCommand(unsigned int button, InputAction action, std::unique_ptr<BaseCommand> pCommand, int id)
 {
 	std::vector<unsigned int> vector{};
 	vector.push_back(button);
 
-	BindCommand(vector, action, std::move(pCommand), id);
+	return BindCommand(vector, action, std::move(pCommand), id);
 }
 
-void dae::InputManager::BindCommand(unsigned int button, InputAction action, std::unique_ptr<Command<float>> pCommand, int id)
+int dae::InputManager::BindCommand(unsigned int button, InputAction action, std::unique_ptr<Command<float>> pCommand, int id)
 {
 	std::vector<unsigned int> vector{};
 	vector.push_back(button);
 
-	BindCommand(vector, action, std::move(pCommand), id);
+	return BindCommand(vector, action, std::move(pCommand), id);
 }
 
-void dae::InputManager::BindCommand(unsigned int button, InputAction action, std::unique_ptr<Command<glm::vec2>> pCommand, int id)
+int dae::InputManager::BindCommand(unsigned int button, InputAction action, std::unique_ptr<Command<glm::vec2>> pCommand, int id)
 {
 	std::vector<unsigned int> vector{};
 	vector.push_back(button);
 
-	BindCommand(vector, action, std::move(pCommand), id);
+	return BindCommand(vector, action, std::move(pCommand), id);
+}
+
+void dae::InputManager::RemoveCommand(int inputId)
+{
+	for (const auto& command : m_pBaseCommands)
+	{
+		if (command.first.inputId == inputId)
+		{
+			m_pBaseCommands.erase(command.first);
+			return;
+		}
+	}
+
+	for (const auto& command : m_p1DValueCommands)
+	{
+		if (command.first.inputId == inputId)
+		{
+			m_p1DValueCommands.erase(command.first);
+			return;
+		}
+	}
+
+	for (const auto& command : m_p2DValueCommands)
+	{
+		if (command.first.inputId == inputId)
+		{
+			m_p2DValueCommands.erase(command.first);
+			return;
+		}
+	}
 }
 
 bool dae::InputManager::GetInputKey(InputKey& outKey, const std::vector<unsigned int>& buttons, InputAction action, int id)
@@ -284,10 +320,12 @@ bool dae::InputManager::GetInputKey(InputKey& outKey, const std::vector<unsigned
 		m_pControllers.push_back(std::make_unique<XBoxController>(static_cast<int>(m_pControllers.size())));
 	}
 
+	++m_MaxInputKeyId;
 	InputKey key{};
+	key.inputId = m_MaxInputKeyId;
 	key.action = action;
 	key.buttons = buttons;
-	key.id = id;
+	key.controllerId = id;
 
 	outKey = key;
 

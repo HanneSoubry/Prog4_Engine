@@ -100,6 +100,13 @@ void dae::LevelLoaderComponent::LoadLevelFromFile(const std::string& levelFile)
 	LevelPropertiesComponent::SetCurrentLevelMap(m_pLevelProperties);
 }
 
+void dae::LevelLoaderComponent::UnloadCurrentLevel()
+{
+	m_pLevelProperties->SetTileAmount(0, 0);
+	m_pLevelTexture->SetTileAmount(0, 0);
+	LevelPropertiesComponent::SetCurrentLevelMap(nullptr);
+}
+
 void dae::LevelLoaderComponent::SetLevelOffset(int x, int y)
 {
 	m_pLevelProperties->SetLevelOffset(x, y);

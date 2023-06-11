@@ -185,6 +185,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
   <ItemGroup>
     <ClCompile Include="BurgerTime.cpp" />
     <ClCompile Include="DieCommand.cpp" />
+    <ClCompile Include="GameManagerComponent.cpp" />
     <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="HowToPlayUIComponent.cpp" />
     <ClCompile Include="IncreaseScoreCommand.cpp" />
@@ -198,6 +199,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
     <ClCompile Include="RotatorComponent.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="StatsDisplayComponent.cpp" />
+    <ClCompile Include="SwitchGameCommand.cpp" />
     <ClCompile Include="TestSoundCommand.cpp" />
     <ClCompile Include="TrashTheCacheGO3DComponent.cpp" />
     <ClCompile Include="TrashTheCacheIntComponent.cpp" />
@@ -205,6 +207,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
   <ItemGroup>
     <ClInclude Include="BurgerTimeEvents.h" />
     <ClInclude Include="DieCommand.h" />
+    <ClInclude Include="GameManagerComponent.h" />
     <ClInclude Include="LevelPropertiesComponent.h" />
     <ClInclude Include="MoveOnGridCommand.h" />
     <ClInclude Include="Prefabs.h" />
@@ -219,6 +222,7 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
     <ClInclude Include="RotatorComponent.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="StatsDisplayComponent.h" />
+    <ClInclude Include="SwitchGameCommand.h" />
     <ClInclude Include="TestSoundCommand.h" />
     <ClInclude Include="TrashTheCacheGO3DComponent.h" />
     <ClInclude Include="TrashTheCacheIntComponent.h" />

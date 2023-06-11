@@ -27,22 +27,26 @@ namespace dae
 
 		struct InputKey
 		{
-			int id;
+			int inputId;
+			int controllerId;
 			std::vector<unsigned int> buttons;
 			InputAction action;
 
 			// required to emplace something in a map
-			bool operator<(const InputKey& other) const { return other.id < id; }
+			bool operator<(const InputKey& other) const { return other.inputId < inputId; }
 		};
 
 		bool ProcessInput();
 
-		void BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<BaseCommand> pCommand, int id = -1);  // use keyboard by default
-		void BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<Command<float>> pCommand, int id = -1);  // use keyboard by default
-		void BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<Command<glm::vec2>> pCommand, int id = -1);  // use keyboard by default
-		void BindCommand(unsigned int button, InputAction action, std::unique_ptr<BaseCommand> pCommand, int id = -1);
-		void BindCommand(unsigned int button, InputAction action, std::unique_ptr<Command<float>> pCommand, int id = -1);
-		void BindCommand(unsigned int button, InputAction action, std::unique_ptr<Command<glm::vec2>> pCommand, int id = -1);
+		// returns unique inputId, needed to remove the command
+		int BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<BaseCommand> pCommand, int id = -1);  // use keyboard by default
+		int BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<Command<float>> pCommand, int id = -1);  // use keyboard by default
+		int BindCommand(const std::vector<unsigned int>& buttons, InputAction action, std::unique_ptr<Command<glm::vec2>> pCommand, int id = -1);  // use keyboard by default
+		int BindCommand(unsigned int button, InputAction action, std::unique_ptr<BaseCommand> pCommand, int id = -1);
+		int BindCommand(unsigned int button, InputAction action, std::unique_ptr<Command<float>> pCommand, int id = -1);
+		int BindCommand(unsigned int button, InputAction action, std::unique_ptr<Command<glm::vec2>> pCommand, int id = -1);
+
+		void RemoveCommand(int inputId);
 
 	private:
 		std::vector<std::unique_ptr<XBoxController>> m_pControllers{};
@@ -57,6 +61,8 @@ namespace dae
 		std::unordered_set<unsigned int> m_KeysUpThisFrame{};
 		std::unordered_set<unsigned int> m_KeysDownThisFrame{};
 		const Uint8* m_KeysPressed{};
+
+		int m_MaxInputKeyId{-1};
 	};
 
 }

@@ -18,6 +18,8 @@ namespace dae
 		LevelLoaderComponent& operator=(LevelLoaderComponent&& other) = delete;
 
 		void LoadLevelFromFile(const std::string& levelFile);
+		void UnloadCurrentLevel();
+
 		void SetLevelTexture(LevelTextureComponent* pTextureComp) { m_pLevelTexture = pTextureComp; }
 		void SetLevelProperties(LevelPropertiesComponent* pPropertiesComp) { m_pLevelProperties = pPropertiesComp; }
 

@@ -90,6 +90,12 @@
     <ClCompile Include="MoveOnGridCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
+    <ClCompile Include="GameManagerComponent.cpp">
+      <Filter>Components\BurgerTime\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="SwitchGameCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TrashTheCacheIntComponent.h">
@@ -147,6 +153,12 @@
       <Filter>Components\BurgerTime\Level</Filter>
     </ClInclude>
     <ClInclude Include="MoveOnGridCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManagerComponent.h">
+      <Filter>Components\BurgerTime\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="SwitchGameCommand.h">
       <Filter>Commands</Filter>
     </ClInclude>
   </ItemGroup>
