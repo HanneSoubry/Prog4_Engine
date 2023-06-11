@@ -116,7 +116,7 @@ void dae::GameObject::ChangeParent(GameObject* pParent, bool worldPositionStays)
 	if (worldPositionStays)
 	{
 		// change local position to keep the same world position
-		glm::vec3 world = m_WorldTransform.GetPosition();
+		glm::vec3 world = GetTransform().GetPosition();
 		glm::vec3 parent = m_pParent->GetTransform().GetPosition();
 		m_LocalTransform.SetPosition(world.x - parent.x, world.y - parent.y, world.z - parent.z);
 	}
@@ -139,7 +139,7 @@ void dae::GameObject::MakeRootParent(std::unique_ptr<dae::GameObject> pChildGame
 	if (worldPositionStays)
 	{
 		// change local position to keep the same world position
-		glm::vec3 world = pChildGameObject->m_WorldTransform.GetPosition();
+		glm::vec3 world = pChildGameObject->GetTransform().GetPosition();
 		glm::vec3 parent = GetTransform().GetPosition();
 		pChildGameObject->m_LocalTransform.SetPosition(world.x - parent.x, world.y - parent.y, world.z - parent.z);
 	}
@@ -162,7 +162,7 @@ std::unique_ptr<dae::GameObject> dae::GameObject::RemoveFromParent(GameObject* p
 	if (worldPositionStays)
 	{
 		// change local position to keep the same world position
-		glm::vec3 world = child->m_WorldTransform.GetPosition();
+		glm::vec3 world = child->GetTransform().GetPosition();
 		child->m_LocalTransform.SetPosition(world.x, world.y, world.z);
 	}
 	else

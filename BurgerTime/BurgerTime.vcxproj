@@ -188,7 +188,13 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
     <ClCompile Include="HealthComponent.cpp" />
     <ClCompile Include="HowToPlayUIComponent.cpp" />
     <ClCompile Include="IncreaseScoreCommand.cpp" />
+    <ClCompile Include="LevelLoaderComponent.cpp" />
+    <ClCompile Include="LevelPropertiesComponent.cpp" />
+    <ClCompile Include="LevelTextureComponent.cpp" />
+    <ClCompile Include="LoadSceneCommand.cpp" />
     <ClCompile Include="MoveCommand.cpp" />
+    <ClCompile Include="MoveOnGridCommand.cpp" />
+    <ClCompile Include="RenderLevelTilesComponent.cpp" />
     <ClCompile Include="RotatorComponent.cpp" />
     <ClCompile Include="ScoreComponent.cpp" />
     <ClCompile Include="StatsDisplayComponent.cpp" />
@@ -199,10 +205,17 @@ xcopy "$(SolutionDir)3rdParty\SDL2_mixer\lib\$(PlatformTarget)\*.dll" "$(OutputP
   <ItemGroup>
     <ClInclude Include="BurgerTimeEvents.h" />
     <ClInclude Include="DieCommand.h" />
+    <ClInclude Include="LevelPropertiesComponent.h" />
+    <ClInclude Include="MoveOnGridCommand.h" />
+    <ClInclude Include="Prefabs.h" />
     <ClInclude Include="HealthComponent.h" />
     <ClInclude Include="HowToPlayUIComponent.h" />
     <ClInclude Include="IncreaseScoreCommand.h" />
+    <ClInclude Include="LevelLoaderComponent.h" />
+    <ClInclude Include="LevelTextureComponent.h" />
+    <ClInclude Include="LoadSceneCommand.h" />
     <ClInclude Include="MoveCommand.h" />
+    <ClInclude Include="RenderLevelTilesComponent.h" />
     <ClInclude Include="RotatorComponent.h" />
     <ClInclude Include="ScoreComponent.h" />
     <ClInclude Include="StatsDisplayComponent.h" />

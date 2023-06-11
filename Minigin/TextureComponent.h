@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseComponent.h"
 #include <string>
+#include <glm/glm.hpp>
 
 namespace dae
 {
@@ -18,6 +19,7 @@ namespace dae
 
 		void SetTexture(const std::string& fileName);
 		std::shared_ptr<Texture2D> GetTexture();
+		glm::vec2 GetSize();
 
 	private:
 		std::shared_ptr<Texture2D> m_pTexture{};

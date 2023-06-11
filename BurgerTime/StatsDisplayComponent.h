@@ -29,9 +29,6 @@ namespace dae
 		int* m_pValue{ nullptr };
 		bool m_ValueSet{ false };
 
-		// TODO: not needed without achievements
-		bool m_ReachedScore500{ false };
-
 		TextComponent* m_pTextComponent{ nullptr };
 	};
 }

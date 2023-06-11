@@ -17,6 +17,7 @@
 #include "DieCommand.h"
 #include "IncreaseScoreCommand.h"
 #include "TestSoundCommand.h"
+#include "LoadSceneCommand.h"
 
 #include "TextComponent.h"
 #include "RenderTextComponent.h"
@@ -30,9 +31,13 @@
 #include "StatsDisplayComponent.h"
 #include "ScoreComponent.h"
 #include "HowToPlayUIComponent.h"
+#include "LevelLoaderComponent.h"
+#include "RenderLevelTilesComponent.h"
 
 #include "ServiceLocator.h"
 #include "SdlSoundSystem.h"
+
+#include "Prefabs.h"
 
 #include <memory>
 #include <iostream>
@@ -47,20 +52,37 @@ void AddInputTest(Scene& scene);
 void Add2MovableCharacters(Scene& scene);
 void Add2PlayableCharacters(Scene& scene);
 void TestSound();
+void CreateLevel1(Scene& scene);
 
 void load()
 {
 	// scene
 	auto& scene = SceneManager::GetInstance().CreateScene("Demo");
 
-	AddBackground(scene);
+	//AddBackground(scene);
 	//AddFPSCounter(scene);
 	//AddRotatingSprites(scene);
 	//AddTrashTheCasheImGUI(scene);
 	//AddInputTest(scene);					
 	//Add2MovableCharacters(scene);			// movement input
-	Add2PlayableCharacters(scene);			// observer & event queue
-	TestSound();
+	//Add2PlayableCharacters(scene);			// observer & event queue
+	//TestSound();
+
+	CreateLevel1(scene);
+}
+
+void CreateLevel1(Scene& scene)
+{
+	int levelPosX{ 120 };
+	int levelPosY{ 90 };
+	scene.Add(std::move(LevelPrefab::Create(levelPosX, levelPosY, true, "../Data/Level/Level1.txt", false)));
+
+	std::vector<unsigned int> keys{ static_cast<unsigned int>(SDL_SCANCODE_A),
+		static_cast<unsigned int>(SDL_SCANCODE_D),
+		static_cast<unsigned int>(SDL_SCANCODE_W),
+		static_cast<unsigned int>(SDL_SCANCODE_S) };
+
+	scene.Add(std::move(PlayerPrefab::Create("ChefPeterPepper.png", { levelPosX, levelPosY }, 100, keys, -1)));
 }
 
 void AddBackground(Scene& scene)
@@ -98,7 +120,6 @@ void AddBackground(Scene& scene)
 	renderTextureComp = go->AddComponent<RenderTextureComponent>(go);
 	renderTextureComp->SetTextureToRender(textureComp);
 }
-
 void AddFPSCounter(Scene& scene)
 {
 	auto fontFPS = ResourceManager::GetInstance().LoadFont("Lingua.otf", 20);
@@ -118,7 +139,6 @@ void AddFPSCounter(Scene& scene)
 	auto fpsComp = go->AddComponent<FPSComponent>(go);
 	fpsComp->SetTextTarget(textComp);
 }
-
 void AddRotatingSprites(Scene& scene)
 {
 	// Mr Hot Dog
@@ -152,7 +172,6 @@ void AddRotatingSprites(Scene& scene)
 	renderTextureComp = pickle->AddComponent<RenderTextureComponent>(pickle);
 	renderTextureComp->SetTextureToRender(textureComp);
 }
-
 void AddTrashTheCasheImGUI(Scene& scene)
 {
 	// ImGui trash the cache
@@ -161,7 +180,6 @@ void AddTrashTheCasheImGUI(Scene& scene)
 	trashImGui->AddComponent<TrashTheCacheIntComponent>(trashImGui);
 	trashImGui->AddComponent<TrashTheCacheGO3DComponent>(trashImGui);
 }
-
 void AddInputTest(Scene& scene)
 {
 	auto inputTest = scene.Add(std::make_unique<GameObject>());
@@ -188,7 +206,6 @@ void AddInputTest(Scene& scene)
 	//										std::make_unique<MoveCommand>(inputTest.get(), 100.f),
 	//										0);
 }
-
 void Add2MovableCharacters(Scene& scene)
 {
 	// Mr Hot Dog
@@ -230,7 +247,6 @@ void Add2MovableCharacters(Scene& scene)
 	InputManager::GetInstance().BindCommand(keys, InputManager::InputAction::Digital2DAxis,
 		std::move(command), 0);
 }
-
 void Add2PlayableCharacters(Scene& scene)
 {
 	// Mr Hot Dog
@@ -379,7 +395,6 @@ void Add2PlayableCharacters(Scene& scene)
 	
 	go->AddComponent<HowToPlayUIComponent>(go);	
 }
-
 void TestSound()
 {
 	std::shared_ptr<SoundSystem> soundSystem;

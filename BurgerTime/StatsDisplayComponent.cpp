@@ -51,10 +51,10 @@ void dae::StatsDisplayComponent::Notify(std::shared_ptr<Event> event)
 		m_pTextComponent->SetText(text);
 
 		// dynamic cast returns nullptr if pointer cast fails
-		auto castedEvent{ dynamic_cast<EventScoreChanged*>(event.get()) };
-		if(castedEvent != nullptr && m_ReachedScore500 == false && *m_pValue >= 500)
-		{
-			m_ReachedScore500 = true;
-		}
+		//auto castedEvent{ dynamic_cast<EventScoreChanged*>(event.get()) };
+		//if(castedEvent != nullptr && *m_pValue >= 500)
+		//{
+		//	m_ReachedScore500 = true;
+		//}
 	}
 }

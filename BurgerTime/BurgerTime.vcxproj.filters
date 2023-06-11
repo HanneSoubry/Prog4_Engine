@@ -28,6 +28,12 @@
     <Filter Include="Events">
       <UniqueIdentifier>{d3d77db5-ca9b-4870-89e4-f4dbc253c2ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Components\BurgerTime">
+      <UniqueIdentifier>{a823f61a-07b4-41b5-9c68-52d51f9dd97b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\BurgerTime\Level">
+      <UniqueIdentifier>{1889887e-3e2b-4c33-aae0-d2fc335ae6d0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BurgerTime.cpp">
@@ -66,6 +72,24 @@
     <ClCompile Include="TestSoundCommand.cpp">
       <Filter>Commands</Filter>
     </ClCompile>
+    <ClCompile Include="LevelLoaderComponent.cpp">
+      <Filter>Components\BurgerTime\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelTextureComponent.cpp">
+      <Filter>Components\BurgerTime\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderLevelTilesComponent.cpp">
+      <Filter>Components\BurgerTime\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="LoadSceneCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelPropertiesComponent.cpp">
+      <Filter>Components\BurgerTime\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveOnGridCommand.cpp">
+      <Filter>Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TrashTheCacheIntComponent.h">
@@ -102,6 +126,27 @@
       <Filter>Events</Filter>
     </ClInclude>
     <ClInclude Include="TestSoundCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelLoaderComponent.h">
+      <Filter>Components\BurgerTime\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelTextureComponent.h">
+      <Filter>Components\BurgerTime\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderLevelTilesComponent.h">
+      <Filter>Components\BurgerTime\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="LoadSceneCommand.h">
+      <Filter>Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="Prefabs.h">
+      <Filter>Main</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelPropertiesComponent.h">
+      <Filter>Components\BurgerTime\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveOnGridCommand.h">
       <Filter>Commands</Filter>
     </ClInclude>
   </ItemGroup>
