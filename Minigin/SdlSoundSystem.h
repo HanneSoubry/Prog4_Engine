@@ -31,6 +31,8 @@ namespace dae
 		virtual void LoadSounds(const std::vector<std::string>& filePaths) override;
 		virtual void LoadMusic(const std::string& filePath) override;
 
+		virtual void Mute(bool mute) override;
+
 	private:
 		SdlSoundSystemImpl* pImpl;
 	};

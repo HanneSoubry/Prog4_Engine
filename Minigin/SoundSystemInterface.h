@@ -21,6 +21,8 @@ namespace dae
 		virtual void LoadSound(const std::string& filePath) = 0;
 		virtual void LoadSounds(const std::vector<std::string>& filePaths) = 0;
 		virtual void LoadMusic(const std::string& filePath) = 0;
+
+		virtual void Mute(bool mute) = 0;
 	};
 
 	class NullSoundSystem final : public SoundSystem
@@ -40,5 +42,7 @@ namespace dae
 		virtual void LoadSound(const std::string&) override {}
 		virtual void LoadSounds(const std::vector<std::string>&) override {}
 		virtual void LoadMusic(const std::string& ) {}
+
+		virtual void Mute(bool) {}
 	};
 }

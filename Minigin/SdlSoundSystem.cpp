@@ -5,7 +5,8 @@
 #include <thread>
 #include <deque>
 #include "SoundEvents.h"
-#include <mutex>
+#include <condition_variable>
+#include <shared_mutex>
 
 using namespace dae;
 
@@ -23,7 +24,7 @@ public:
 			bool quit{ false };
 			while (!quit)
 			{
-				std::unique_lock<std::mutex> lock{m_Mutex};
+				std::shared_lock<std::shared_mutex> lock{m_Mutex};
 				// wait untill something is in the queue
 				// lock will be released if waiting, and reaquired when passing the wait
 				m_ConditionVariableLoad.wait(lock, [&] { return !m_LoadEvents.empty(); });
@@ -52,7 +53,7 @@ public:
 					// re-lock
 					lock.lock();
 					m_pSounds[soundEvent->m_SoundPath] = sound;
-
+					m_ConditionVariablePlay.notify_all();
 					continue; // lock goes out of scope -> unlocked
 				}
 
@@ -76,6 +77,7 @@ public:
 					// re-lock
 					lock.lock();
 					m_pMusics[musicEvent->m_MusicPath] = music;
+					m_ConditionVariablePlay.notify_all();
 					continue; //lock-out-of-scope-release
 				}
 
@@ -90,7 +92,7 @@ public:
 			bool quit{ false };
 			while (!quit)
 			{
-				std::unique_lock<std::mutex> lock{m_Mutex};
+				std::shared_lock<std::shared_mutex> lock{m_Mutex};
 				// wait untill something is in the queue
 				// lock will be released if waiting, and reaquired when passing the wait
 				m_ConditionVariablePlay.wait(lock, [&] { return !m_PlayEvents.empty(); });
@@ -169,7 +171,7 @@ public:
 			Mix_FreeMusic(music.second);
 		}
 
-		std::unique_lock<std::mutex> lock{m_Mutex};
+		std::shared_lock<std::shared_mutex> lock{m_Mutex};
 		std::shared_ptr<Event> event { new EventQuitSound() };
 		m_LoadEvents.push_back(event);
 		m_PlayEvents.push_back(event);
@@ -180,12 +182,15 @@ public:
 
 	virtual void PlaySound(const std::string& soundPath, const float volume, int loops)
 	{
-		std::shared_ptr<Event> event { new EventPlaySound(soundPath, RemapVolume(volume), loops) };
+		if (!m_Muted)
+		{
+			std::shared_ptr<Event> event { new EventPlaySound(soundPath, RemapVolume(volume), loops) };
 
-		std::unique_lock<std::mutex> lock{m_Mutex};
-		m_PlayEvents.push_back(event);
-		m_ConditionVariablePlay.notify_all();
-		//lock-out-of-scope-release
+			std::shared_lock<std::shared_mutex> lock{m_Mutex};
+			m_PlayEvents.push_back(event);
+			m_ConditionVariablePlay.notify_all();
+			//lock-out-of-scope-release
+		}
 	}
 	virtual void StopAllSounds()
 	{
@@ -196,7 +201,7 @@ public:
 	{
 		std::shared_ptr<Event> event { new EventPlayMusic(musicPath, RemapVolume(volume), looping) };
 
-		std::unique_lock<std::mutex> lock{m_Mutex};
+		std::shared_lock<std::shared_mutex> lock{m_Mutex};
 		m_PlayEvents.push_back(event);
 		m_ConditionVariablePlay.notify_all();
 		//lock-out-of-scope-release
@@ -230,7 +235,7 @@ public:
 	{
 		std::shared_ptr<Event> event { new EventLoadSound(filePath) };
 
-		std::unique_lock<std::mutex> lock{m_Mutex};
+		std::shared_lock<std::shared_mutex> lock{m_Mutex};
 		m_LoadEvents.push_back(event);
 		m_ConditionVariableLoad.notify_all();
 		//lock-out-of-scope-release
@@ -248,10 +253,26 @@ public:
 	{
 		std::shared_ptr<Event> event { new EventLoadMusic(filePath) };
 
-		std::unique_lock<std::mutex> lock{m_Mutex};
+		std::shared_lock<std::shared_mutex> lock{m_Mutex};
 		m_LoadEvents.push_back(event);
 		m_ConditionVariableLoad.notify_all();
 		//lock-out-of-scope-release
+	}
+
+	void Mute(bool mute)
+	{
+		if (mute)
+		{
+			// returns the previous value
+			m_MusicVolume = Mix_VolumeMusic(0);
+			StopAllSounds();
+			m_Muted = true;
+		}
+		else
+		{
+			Mix_VolumeMusic(m_MusicVolume);
+			m_Muted = false;
+		}
 	}
 
 private: 
@@ -263,9 +284,12 @@ private:
 	std::jthread m_PlayThread{};
 	std::deque<std::shared_ptr<Event>> m_LoadEvents{};
 	std::deque<std::shared_ptr<Event>> m_PlayEvents{};
-	std::mutex m_Mutex{};
-	std::condition_variable m_ConditionVariableLoad{};
-	std::condition_variable m_ConditionVariablePlay{};
+	std::shared_mutex m_Mutex{};
+	std::condition_variable_any m_ConditionVariableLoad{};
+	std::condition_variable_any m_ConditionVariablePlay{};
+
+	bool m_Muted{};
+	int m_MusicVolume{};
 
 	int RemapVolume(float value)
 	{
@@ -297,6 +321,11 @@ void dae::SdlSoundSystem::LoadSounds(const std::vector<std::string>& filePaths)
 void dae::SdlSoundSystem::LoadMusic(const std::string& filePath)
 {
 	pImpl->LoadMusic(filePath);
+}
+
+void dae::SdlSoundSystem::Mute(bool mute)
+{
+	pImpl->Mute(mute);
 }
 
 void dae::SdlSoundSystem::PlaySound(const std::string& soundPath, const float volume, int loops)

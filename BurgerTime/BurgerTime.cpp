@@ -18,6 +18,7 @@
 #include "IncreaseScoreCommand.h"
 #include "TestSoundCommand.h"
 #include "LoadSceneCommand.h"
+#include "MuteVolumeCommand.h"
 
 #include "TextComponent.h"
 #include "RenderTextComponent.h"
@@ -58,7 +59,11 @@ void CreateLevel1(Scene& scene);
 void load()
 {
 	// scene
-	auto& scene = SceneManager::GetInstance().CreateScene("Demo");
+	auto& scene = SceneManager::GetInstance().CreateScene("BurgerTime");
+
+	std::shared_ptr<SoundSystem> soundSystem;
+	soundSystem.reset(new SdlSoundSystem());
+	ServiceLocator::RegisterSoundSystem(soundSystem);
 
 	//AddBackground(scene);
 	//AddFPSCounter(scene);
@@ -78,6 +83,11 @@ void CreateLevel1(Scene& scene)
 	auto manager = game->AddComponent<GameManagerComponent>(game);
 	manager->SetScene(&scene);
 	manager->Initialize();
+
+	auto ss = ServiceLocator::GetSoundSystem();
+	ss->LoadMusic("../Data/GameMusic.mp3");
+	ss->PlayMusic("../Data/GameMusic.mp3", 1, true);
+	InputManager::GetInstance().BindCommand(SDL_SCANCODE_M, InputManager::InputAction::Down, std::make_unique<MuteVolumeCommand>(true));
 }
 
 void AddBackground(Scene& scene)
